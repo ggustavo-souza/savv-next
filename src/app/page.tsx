@@ -1,22 +1,15 @@
-'use client'
-
+import MapaExibicao from "../components/MapaExibicao";
 import Navbar from "../components/Navbar"
 import { type MarcadorServico } from "../types/Servico";
-import dynamic from "next/dynamic";
-
-const MapaExibicao = dynamic(() => import('@/src/components/MapaExibicao'), {
-    ssr: false,
-    loading: () => <p>Carregando o mapa...</p>
-})
 
 export default function Home() {
 
     const mockMarcadores: MarcadorServico[] = [
-        { id: 1, situacao: "pendente", categoria: "poda", coordenadas: [-23.5390, -47.4450]},
-        { id: 2, situacao: "concluida", categoria: "erradicacao", coordenadas: [-23.5520, -47.4370]},
-        { id: 3, situacao: "negada", categoria: "erradicacao", coordenadas: [-23.5420, -47.4580]},
-        { id: 4, situacao: "pendente", categoria: "plantio", coordenadas: [-23.5610, -47.4310]},
-        { id: 5, situacao: "concluida", categoria: "rocagem", coordenadas: [-23.5350, -47.4350]},
+        { id: 1, situacao: "pendente", categoria: "poda", coordenadas: { lat: -23.5390, lng: -47.4450 } },
+        { id: 2, situacao: "concluida", categoria: "erradicacao", coordenadas: { lat: -23.5520, lng: -47.4370 } },
+        { id: 3, situacao: "negada", categoria: "erradicacao", coordenadas: { lat: -23.5420, lng: -47.4580 } },
+        { id: 4, situacao: "pendente", categoria: "plantio", coordenadas: { lat: -23.5610, lng: -47.4310 } },
+        { id: 5, situacao: "concluida", categoria: "rocagem", coordenadas: { lat: -23.5350, lng: -47.4350 } },
     ]
 
     return (

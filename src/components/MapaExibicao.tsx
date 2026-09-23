@@ -1,71 +1,58 @@
 'use client'
 
-import { APIProvider, Map, useMap, Marker, Pin, AdvancedMarker } from "@vis.gl/react-google-maps"
-import { useEffect } from "react";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 import type { MarcadorServico } from "../types/Servico";
 
-function MapRestrictor() {
-    const map = useMap() // hook usado pra criar configurações e modificar o mapa
-
-    useEffect(() => {
-        if (!map || !window.google) return;
-
-        const limiteVotorantim = new google.maps.LatLngBounds(
-            new google.maps.LatLng(-23.6850, -47.4950), //sul e oeste
-            new google.maps.LatLng(-23.5110, -47.3110) // norte e leste
-        );
-
-        map.setOptions({
-            restriction: {
-                latLngBounds: limiteVotorantim,
-                strictBounds: true
-            }
-        })
-    }, [map])
-
-    return null
-}
+const customIcon = L.icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
 
 interface MapaExibicaoProps {
     marcadores: MarcadorServico[]
 }
 
-export default function MapaExibicao({marcadores}: MapaExibicaoProps) {
-    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-
-    const esconderEstabelecimento: google.maps.MapTypeStyle[] = [
-        {
-            featureType: "poi",
-            elementType: "all",
-            stylers: [
-                { visibility: "off" }
-            ]
-        }
+export default function MapaExibicao({ marcadores }: MapaExibicaoProps) {
+    const COORDENADAS_VOTORANTIM: L.LatLngTuple = [-23.5466, -47.4382];
+    
+    // sul e oeste: -23.6850, -47.4950
+    // norte e leste: -23.5110, -47.3110
+    const limiteVotorantim: L.LatLngBoundsLiteral = [
+        [-23.6850, -47.4950],
+        [-23.5110, -47.3110]
     ];
 
-    const COORDENADAS_VOTORANTIM = { lat: -23.5466, lng: -47.4382 }
-
     return (
-        <APIProvider apiKey={apiKey ? apiKey : 'none'}>
-            <Map
-                defaultCenter={COORDENADAS_VOTORANTIM}
-                defaultZoom={13}
-                disableDefaultUI={true}
-                keyboardShortcuts={false}
-                styles={esconderEstabelecimento}
-                //Colocar o mapId depois
-            >
-                <MapRestrictor />
-                
-                {marcadores.map((marcador) => (
-                    //mudar pra AdvancedMarker depois que pegar o mapId
-                    <Marker 
-                        key={marcador.id}
-                        position={marcador.coordenadas}
-                        title={`ID: ${marcador.id} - ${marcador.situacao}`}
-                    />
-                ))}
-            </Map>
-        </APIProvider>
-    )
+        <MapContainer 
+            center={COORDENADAS_VOTORANTIM} 
+            zoom={13} 
+            maxBounds={limiteVotorantim}
+            maxBoundsViscosity={1.0}
+            style={{ width: "100%", height: "100%", minHeight: "400px" }}
+            zoomControl={false}
+            keyboard={false}
+        >
+            <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+
+            {marcadores.map((marcador) => (
+                <Marker 
+                    key={marcador.id} 
+                    position={[marcador.coordenadas.lat, marcador.coordenadas.lng]}
+                    icon={customIcon}
+                    title={`ID: ${marcador.id} - ${marcador.situacao}`}
+                />
+            ))}
+        </MapContainer>
+    );
 }
