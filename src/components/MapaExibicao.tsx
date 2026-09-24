@@ -33,7 +33,9 @@ export default function MapaExibicao({ marcadores }: MapaExibicaoProps) {
     return (
         <MapContainer 
             center={COORDENADAS_VOTORANTIM} 
-            zoom={13} 
+            zoom={14} 
+            minZoom={14}
+            maxZoom={16}
             maxBounds={limiteVotorantim}
             maxBoundsViscosity={1.0}
             style={{ width: "100%", height: "100%", minHeight: "400px" }}

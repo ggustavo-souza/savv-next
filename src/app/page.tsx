@@ -1,4 +1,5 @@
 import MapaExibicao from "../components/MapaExibicao";
+import Navbar from "../components/Navbar";
 import { type MarcadorServico } from "../types/Servico";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
 
     return (
         <>
+            <Navbar tipo="visitante" />
             <div className="relative h-screen w-full flex flex-col items-center justify-center gap-6 overflow-hidden group">
                 <div className="absolute inset-0 bg-[url('/foto-de-floresta.jpg')] bg-cover shadow-2xl bg-center bg-no-repeat brightness-50 grayscale group-hover:grayscale-0 transition-all duration-1000 z-0" />
                 <h1 className="text-6xl text-center font-extrabold text-white z-10 select-none max-w-2xl">Solicite Serviços Ambientais</h1>

@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Navbar() {
+interface NavbarProps {
+  tipo: "visitante" | "usuario" | "diretor" | "gerente" | "fiscal"
+}
+
+export default function Navbar({ tipo }: NavbarProps) {
   return (
     <header className="w-full shadow-sm border-b h-fit border-gray-200 bg-primaria">
       <nav className="flex w-full justify-between px-10">

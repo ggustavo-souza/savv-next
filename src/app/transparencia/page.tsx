@@ -5,9 +5,10 @@ import type { MarcadorServico } from "../../types/Servico";
 import { BsList } from "react-icons/bs";
 import ConverterNomeMes from "@/src/services/ConverterNomeMes";
 import type { Metadata } from "next";
+import Navbar from "@/src/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "SAVV - Transparência",
+    title: "SAVV - Transparência",
 };
 
 export default function Transparencia() {
@@ -40,6 +41,7 @@ export default function Transparencia() {
 
     return (
         <>
+            <Navbar tipo="visitante" />
             <div className="w-full h-screen flex flex-row mt-20 justify-between gap-6">
                 <article className="flex flex-col w-3/2 text-start ms-12 gap-3">
                     <p className="font-bold text-secundaria">NOSSA ATUAÇÃO</p>
