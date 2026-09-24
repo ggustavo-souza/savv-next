@@ -43,15 +43,16 @@ Aplicação desenvolvida para modernizar, organizar e dar transparência às sol
      import dynamic from 'next/dynamic';
      const MapaExibicao = dynamic(() => import('@/components/MapaExibicao'), { ssr: false });
      ```
+2. **Forma de Desenvolvimento BackEnd**:
+    - O backend deste projeto deve ser desenvolvido utilizando de Server Actions e Server Components. Sem a utilização de rotas como no padrão Route Handlers.
 
-2. **Organização de Diretórios (`src/`)**:
+3. **Organização de Diretórios (`src/`)**:
    - `src/app/`: Rotas, páginas e layouts do App Router.
-   - `src/app/api`: Rotas e funções do Backend.
    - `src/components/`: Componentes reutilizáveis de interface.
    - `src/services/`: Regras de negócio utilitárias, formatação e integrações.
    - `src/types/`: Interfaces e tipos TypeScript compartilhados.
 
-3. **Padrões de Código**:
+4. **Padrões de Código**:
    - Manter código limpo e com tipagem estrita (TypeScript).
    - Nomes de componentes em PascalCase (ex: `MapaExibicao.tsx`).
    - Nomes de variáveis e funções sempre em camelCase.
