@@ -115,3 +115,20 @@ Toda mudança de status de uma solicitação gera um registro de auditoria na ta
        │
        └─► (Fiscal aprova vistoria e Gerente conclui) ──► "concluida"
 ```
+
+## Controle de Retornos do Back-End
+
+Aqui são informados os modelos de response do back-end, em JSON.
+
+- **Marcadores de Solicitação**:
+  {
+    id: number
+    status: "pendente" | "concluida" | "negada"
+    categoria: "poda" | "erradicacao" | "plantio" | "rocagem"
+    coordenadas: {
+      lat: number
+      lng: number
+    }
+  }
+
+- ** **
