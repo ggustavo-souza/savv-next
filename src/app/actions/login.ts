@@ -8,7 +8,7 @@ import { verificarSenha, hashSenha, criarCookieSessao } from "@/src/lib/auth/aut
 export async function loginAction(formData: FormData) {
     // pega os elementos do objeto FormData enviado pela requisição
     const email = formData.get('email') as string
-    const senha = formData.get('senha') as string
+    const senha = await hashSenha(formData.get('senha') as string)
 
     // ja retorna erro caso nao tenha email ou senha
     if (!email || !senha) {
@@ -23,7 +23,7 @@ export async function loginAction(formData: FormData) {
         return { error: "Credenciais Inválidas" }
     }
     // aqui verifica se a senha registrada (com hash) vai bater com a que o usuário digitou
-    const validarSenha = await verificarSenha(senha, await hashSenha(usuario.senha))
+    const validarSenha = await verificarSenha(senha, usuario.senha)
 
     // se retornar false é pq não bateu ai ja da erro
     if (!validarSenha)
