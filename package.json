@@ -2,11 +2,17 @@
   "name": "savv-next",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "drizzle:push": "drizzle-kit push",
+    "drizzle:generate": "drizzle-kit generate",
+    "drizzle:migrate": "drizzle-kit migrate",
+    "drizzle:seed": "tsx src/lib/db/seed.ts",
+    "drizzle:run": "tsx src/lib/db/index.ts"
   },
   "dependencies": {
     "chart.js": "^4.5.1",
@@ -31,6 +37,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }
