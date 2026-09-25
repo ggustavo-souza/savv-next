@@ -4,3 +4,9 @@ export type Usuario = {
     email: string;
     senha: string;
 }
+
+export type UsuarioBD = {
+    nome: string;
+    email: string;
+    senha: string
+}

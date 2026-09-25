@@ -1,6 +1,6 @@
 import { Funcionario } from "@/src/types/Funcionario";
 import { db } from ".";
-import type { Usuario } from "@/src/types/Usuario";
+import type { UsuarioBD } from "@/src/types/Usuario";
 import type { ServicoBD } from "@/src/types/Servico";
 import * as schema from "./schema";
 
@@ -8,10 +8,10 @@ const teste = await db.select().from(schema.usuarios);
 
 if (teste.length === 0) {
 
-    const seedUsers: Usuario[] = [
-        { idUsuario: 1, nome: "gustavo1", email: "gustavo@email.com", senha: "123" },
-        { idUsuario: 2, nome: "gustavo2", email: "gustavo2@email.com", senha: "123" },
-        { idUsuario: 3, nome: "gustavo3", email: "gustavo3@email.com", senha: "123" }
+    const seedUsers: UsuarioBD[] = [
+        { nome: "gustavo1", email: "gustavo@email.com", senha: "123" },
+        { nome: "gustavo2", email: "gustavo2@email.com", senha: "123" },
+        { nome: "gustavo3", email: "gustavo3@email.com", senha: "123" }
     ]
 
     const seedFuncionarios: Funcionario[] = [
@@ -21,9 +21,9 @@ if (teste.length === 0) {
     ]
 
     const seedServicos: ServicoBD[] = [
-        { protocolo: 1, observacao: "bla bla bla", endereco: "Rua do sim, 10 18190-000 Centro", lat: -23.1230, lng: -50.1902, imagem: 'imagem.png', status: "pendente", tipoServico: "poda", idUsuario: 1 },
-        { protocolo: 2, observacao: "bla bla bla", endereco: "Rua do sim, 10 18190-000 Centro", lat: -23.1230, lng: -50.1902, imagem: 'imagem.png', status: "em_analise", tipoServico: "plantio", idUsuario: 1 },
-        { protocolo: 3, observacao: "bla bla bla", endereco: "Rua do sim, 10 18190-000 Centro", lat: -23.1230, lng: -50.1902, imagem: 'imagem.png', status: "pendente", tipoServico: "erradicacao", idUsuario: 1 }
+        { observacao: "bla bla bla", endereco: "Rua do sim, 10 18190-000 Centro", lat: -23.1230, lng: -50.1902, imagem: 'imagem.png', status: "pendente", tipoServico: "poda", idUsuario: 1 },
+        { observacao: "bla bla bla", endereco: "Rua do sim, 10 18190-000 Centro", lat: -23.1230, lng: -50.1902, imagem: 'imagem.png', status: "em_analise", tipoServico: "plantio", idUsuario: 1 },
+        { observacao: "bla bla bla", endereco: "Rua do sim, 10 18190-000 Centro", lat: -23.1230, lng: -50.1902, imagem: 'imagem.png', status: "pendente", tipoServico: "erradicacao", idUsuario: 1 }
     ]
 
     try {

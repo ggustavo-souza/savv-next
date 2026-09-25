@@ -6,7 +6,6 @@ export type MarcadorServico = {
 };
 
 export type ServicoBD = {
-    protocolo: number
     observacao: string
     endereco: string
     lat: number
