@@ -3,15 +3,15 @@ import { mysqlTable, varchar, timestamp, mysqlEnum, int } from 'drizzle-orm/mysq
 export const usuarios = mysqlTable('usuarios', {
     idUsuario: int('idUsuario').primaryKey().autoincrement(),
     nome: varchar('nome', { length: 50 }).notNull(),
-    email: varchar('email', { length: 256 }).notNull().unique(),
-    senha: varchar('senha', { length: 16 }).notNull(),
+    email: varchar('email', { length: 150 }).notNull().unique(),
+    senha: varchar('senha', { length: 256 }).notNull(),
 });
 
 export const funcionario = mysqlTable('funcionarios', {
     idFuncionario: int('idFuncionario').primaryKey().autoincrement(),
     nome: varchar('nome', { length: 50 }).notNull(),
-    email: varchar('email', { length: 256 }).notNull().unique(),
-    senha: varchar('senha', { length: 16 }).notNull(),
+    email: varchar('email', { length: 150 }).notNull().unique(),
+    senha: varchar('senha', { length: 256 }).notNull(),
     cargo: mysqlEnum('cargo', ["diretor", "gerente", "fiscal"]).notNull(),
 })
 
