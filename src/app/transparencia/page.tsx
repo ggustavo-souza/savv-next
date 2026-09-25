@@ -32,11 +32,11 @@ export default function Transparencia() {
     ).chave;
 
     const mockMarcadores: MarcadorServico[] = [
-        { id: 1, situacao: "pendente", categoria: "poda", coordenadas: { lat: -23.5390, lng: -47.4450 } },
-        { id: 2, situacao: "concluida", categoria: "erradicacao", coordenadas: { lat: -23.5520, lng: -47.4370 } },
-        { id: 3, situacao: "negada", categoria: "erradicacao", coordenadas: { lat: -23.5420, lng: -47.4580 } },
-        { id: 4, situacao: "pendente", categoria: "plantio", coordenadas: { lat: -23.5610, lng: -47.4310 } },
-        { id: 5, situacao: "concluida", categoria: "rocagem", coordenadas: { lat: -23.5350, lng: -47.4350 } },
+        { protocolo: 1, status: "pendente", categoria: "poda", coordenadas: { lat: -23.5390, lng: -47.4450 } },
+        { protocolo: 2, status: "concluida", categoria: "erradicacao", coordenadas: { lat: -23.5520, lng: -47.4370 } },
+        { protocolo: 3, status: "negada", categoria: "erradicacao", coordenadas: { lat: -23.5420, lng: -47.4580 } },
+        { protocolo: 4, status: "pendente", categoria: "plantio", coordenadas: { lat: -23.5610, lng: -47.4310 } },
+        { protocolo: 5, status: "concluida", categoria: "rocagem", coordenadas: { lat: -23.5350, lng: -47.4350 } },
     ]
 
     return (
