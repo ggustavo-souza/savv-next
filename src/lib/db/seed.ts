@@ -42,6 +42,8 @@ if (teste.length === 0) {
     } catch (e) {
         if (e instanceof Error)
             console.log("Ocorreu um erro ao tentar inserir algum dos dados no banco de dados:" + e.message)
+    } finally {
+        process.exit(0);
     }
 } else {
     console.log("O seed não será feito pois ja existem registros no banco de dados.")
