@@ -12,8 +12,8 @@ export async function verificarSenha(senha: string, hash: string): Promise<boole
     return await bcrypt.compare(senha, hash);
 }
 
-export async function criarCookieSessao(userId: number) {
-    const token = await new SignJWT({ userId }).setProtectedHeader({alg: "HS256"}).setExpirationTime('1d').sign(JWT_SECRET)
+export async function criarCookieSessao(userId: number, cargo: string | null = null) {
+    const token = await new SignJWT({ userId, cargo }).setProtectedHeader({alg: "HS256"}).setExpirationTime('1d').sign(JWT_SECRET)
 
     const guardarCookie = await cookies();
 

@@ -3,12 +3,18 @@
 import { db } from "@/src/lib/db"
 import { eq } from "drizzle-orm"
 import { usuarios } from "@/src/lib/db/schema"
-import { verificarSenha, hashSenha, criarCookieSessao } from "@/src/lib/auth/auth"
+import { verificarSenha, criarCookieSessao } from "@/src/lib/auth/auth"
+import { redirect } from "next/navigation"
 
-export async function loginAction(formData: FormData) {
+export type LoginState = {
+    error?: string
+    success?: boolean
+} | null
+
+export async function loginAction(_prevState: LoginState, formData: FormData): Promise<LoginState> {
     // pega os elementos do objeto FormData enviado pela requisição
     const email = formData.get('email') as string
-    const senha = await hashSenha(formData.get('senha') as string)
+    const senha = formData.get('senha') as string
 
     // ja retorna erro caso nao tenha email ou senha
     if (!email || !senha) {
@@ -30,6 +36,7 @@ export async function loginAction(formData: FormData) {
         return { error: "A senha digitada está incorreta" }
 
     // aqui cria o cookie da sessão se der tudo certo e retorna true
-    await criarCookieSessao(usuario.idUsuario)
-    return { success: true }
+    await criarCookieSessao(usuario.idUsuario, null)
+
+    redirect("/")
 }

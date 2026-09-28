@@ -5,31 +5,66 @@ import { eq } from "drizzle-orm"
 import { usuarios } from "@/src/lib/db/schema"
 import { hashSenha } from "@/src/lib/auth/auth"
 import { UsuarioBD } from "@/src/types/Usuario"
+import { redirect } from "next/navigation"
 
-export async function registerAction(formData: FormData) {
-    // pega os elementos do objeto FormData enviado pela requisição
-    const email = formData.get('email') as string
-    const nome = formData.get('nome') as string
-    const senha = await hashSenha(formData.get('senha') as string)
+export type RegisterState = {
+    error?: string
+    success?: boolean
+} | null
 
-    // ja retorna erro caso nao tenha email ou senha
-    if (!email || !senha) {
-        return { error: 'Preencha todos os campos.' };
+export async function registerAction(
+    _prevState: RegisterState,
+    formData: FormData
+): Promise<RegisterState> {
+    const nome = (formData.get('nome') as string | null)?.trim() ?? ''
+    const email = (formData.get('email') as string | null)?.trim().toLowerCase() ?? ''
+    const senha = (formData.get('senha') as string | null) ?? ''
+    const confirmarSenha = (formData.get('confirmarSenha') as string | null) ?? ''
+
+    if (!nome || !email || !senha || !confirmarSenha) {
+        return { error: 'Preencha todos os campos obrigatórios.' }
     }
 
-    // aqui checa no banco de dados se existe algum usuário onde o email bata com o enviado na requisicao
-    const [usuario] = await db.select().from(usuarios).where(eq(usuarios.email, email)).limit(1)
-
-    // se tiver já da erro
-    if (usuario) {
-        return { error: "Um usuário com este e-mail já existe!" }
+    if (nome.length > 50) {
+        return { error: 'O nome deve ter no máximo 50 caracteres.' }
     }
 
-    const novoUsuario: UsuarioBD = {nome: nome, email: email, senha: senha}
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email) || email.length > 150) {
+        return { error: 'Por favor, insira um e-mail válido.' }
+    }
 
-    await db.insert(usuarios).values(novoUsuario)
+    if (senha.length < 6) {
+        return { error: 'A senha deve conter no mínimo 6 caracteres.' }
+    }
 
+    if (senha !== confirmarSenha) {
+        return { error: 'As senhas não coincidem.' }
+    }
 
+    try {
+        const [usuarioExistente] = await db
+            .select()
+            .from(usuarios)
+            .where(eq(usuarios.email, email))
+            .limit(1)
 
-    return { success: true }
+        if (usuarioExistente) {
+            return { error: 'Um usuário com este e-mail já existe.' }
+        }
+
+        const senhaHash = await hashSenha(senha)
+        const novoUsuario: UsuarioBD = {
+            nome,
+            email,
+            senha: senhaHash
+        }
+
+        await db.insert(usuarios).values(novoUsuario)
+    } catch (e) {
+        console.error('Erro ao cadastrar usuário:', e)
+        return { error: 'Ocorreu um erro ao processar o registro. Tente novamente mais tarde.' }
+    }
+
+    redirect('/login')
 }
