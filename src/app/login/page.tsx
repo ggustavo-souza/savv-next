@@ -1,6 +1,5 @@
 'use client'
 
-import Navbar from "@/src/components/Navbar";
 import Link from "next/link";
 import { loginAction } from "@/src/app/actions/login";
 import { useActionState } from "react";
@@ -11,7 +10,6 @@ export default function Login() {
 
     return (
         <>
-            <Navbar tipo="visitante" />
             <main className="flex items-center justify-center flex-col ">
                 {/* card login */}
                 <div className="shadow-sm w-lg flex flex-col p-10 mt-16 mb-8 border-t-gray-200 border-t">
