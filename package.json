@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "drizzle:push": "drizzle-kit push",
+    "drizzle:push": "drizzle-kit push --force",
     "drizzle:generate": "drizzle-kit generate",
     "drizzle:migrate": "drizzle-kit migrate",
     "drizzle:seed": "tsx src/lib/db/seed.ts",

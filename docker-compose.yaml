@@ -30,7 +30,6 @@ services:
         condition: service_healthy
     command: >
       sh -c "npm run drizzle:push &&
-             npm run drizzle:seed &&
              npm run dev"
     volumes:
       - .:/app
