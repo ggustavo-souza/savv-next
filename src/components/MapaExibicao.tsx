@@ -49,10 +49,10 @@ export default function MapaExibicao({ marcadores }: MapaExibicaoProps) {
 
             {marcadores.map((marcador) => (
                 <Marker 
-                    key={marcador.id} 
+                    key={marcador.protocolo} 
                     position={[marcador.coordenadas.lat, marcador.coordenadas.lng]}
                     icon={customIcon}
-                    title={`ID: ${marcador.id} - ${marcador.situacao}`}
+                    title={`ID: ${marcador.protocolo} - ${marcador.status}`}
                 />
             ))}
         </MapContainer>
