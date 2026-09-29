@@ -1,16 +1,16 @@
 'use client'
 
-import {Chart as ChartJS, ArcElement, Tooltip, Legend, type ChartOptions} from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, type ChartOptions } from 'chart.js';
 import { Pie } from 'react-chartjs-2'
 
 interface GraficoPizzaProps {
-    dadosGrafico: number[]
+  dadosGrafico: number[]
 }
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-export default function GraficoPizza({dadosGrafico}: GraficoPizzaProps) {
-    
+export default function GraficoPizza({ dadosGrafico }: GraficoPizzaProps) {
+
   const data = {
     labels: ['Poda', 'Erradicação', 'Plantio'],
     datasets: [
