@@ -24,6 +24,6 @@ export const servicos = mysqlTable('servicos', {
     lng: int('lng').notNull(),
     imagem: varchar('imagem', { length: 60 }).notNull(),
     status: mysqlEnum('status', ["pendente", "em_analise", "concluida", "cancelada"]).notNull().default('pendente'),
-    tipoServico: mysqlEnum('tipoServico', ["poda", "plantio", "erradicacao", "rocagem"]),
+    categoria: mysqlEnum('categoria', ["poda", "plantio", "erradicacao", "rocagem"]).notNull(),
     idUsuario: int("idUsuario").references(() => usuarios.idUsuario)
 })

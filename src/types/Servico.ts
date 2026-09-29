@@ -1,7 +1,7 @@
 export type MarcadorServico = {
     protocolo: number;
-    status: "pendente" | "concluida" | "negada";
-    categoria: "poda" | "erradicacao" | "plantio" | "rocagem"
+    status: "pendente" | "em_analise" | "concluida" | "cancelada";
+    categoria: "poda" | "erradicacao" | "plantio" | "rocagem";
     coordenadas: { lat: number; lng: number };
 };
 

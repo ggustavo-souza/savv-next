@@ -1,15 +1,13 @@
 import MapaExibicao from "../components/MapaExibicao";
-import { type MarcadorServico } from "../types/Servico";
+import { db } from "../lib/db";
+import { servicos } from "../lib/db/schema";
+import { MarcadorServico } from "../types/Servico";
 
-export default function Home() {
+export default async function Home() {
 
-    const mockMarcadores: MarcadorServico[] = [
-        { protocolo: 1, status: "pendente", categoria: "poda", coordenadas: { lat: -23.5390, lng: -47.4450 } },
-        { protocolo: 2, status: "concluida", categoria: "erradicacao", coordenadas: { lat: -23.5520, lng: -47.4370 } },
-        { protocolo: 3, status: "negada", categoria: "erradicacao", coordenadas: { lat: -23.5420, lng: -47.4580 } },
-        { protocolo: 4, status: "pendente", categoria: "plantio", coordenadas: { lat: -23.5610, lng: -47.4310 } },
-        { protocolo: 5, status: "concluida", categoria: "rocagem", coordenadas: { lat: -23.5350, lng: -47.4350 } },
-    ]
+    // funcionamento real para pegar solicitacoes de fato presentes no banco e colocá-las como marcadores
+
+    const marcadoresSolicitacao: MarcadorServico[] = await db.select({protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria , coordenadas: {lat: servicos.lat, lng: servicos.lng}}).from(servicos)
 
     return (
         <>
@@ -37,7 +35,7 @@ export default function Home() {
             </section>
             <article className="flex flex-row mx-16 my-6 border border-gray-300 rounded-sm">
                 <div className="w-3/4 h-130 z-10">
-                    <MapaExibicao marcadores={mockMarcadores} />
+                    <MapaExibicao marcadores={marcadoresSolicitacao} />
                 </div>
                 <aside className="w-1/4 self-center">
                     <div className="flex flex-col px-8">
