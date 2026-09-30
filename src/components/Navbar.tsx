@@ -28,7 +28,7 @@ export default function Navbar({ tipo }: NavbarProps) {
               </Link>
             </li>
             <li>
-              <Link href="/servico" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+              <Link href="/servicos" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
                 Serviço
               </Link>
             </li>
@@ -55,7 +55,7 @@ export default function Navbar({ tipo }: NavbarProps) {
               </Link>
             </li>
             <li>
-              <Link href="/servico" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+              <Link href="/servicos" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
                 Serviço
               </Link>
             </li>
@@ -72,7 +72,7 @@ export default function Navbar({ tipo }: NavbarProps) {
         {tipo === "diretor" && (
           <ul className="flex items-center gap-6">
             <li>
-              <Link href="/servico" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+              <Link href="/servicos" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
                 Gerenciar Funcionários
               </Link>
             </li>
@@ -94,7 +94,7 @@ export default function Navbar({ tipo }: NavbarProps) {
               </Link>
             </li>
             <li>
-              <Link href="/servico" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+              <Link href="/servicos" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
                 Serviço
               </Link>
             </li>
@@ -121,7 +121,7 @@ export default function Navbar({ tipo }: NavbarProps) {
               </Link>
             </li>
             <li>
-              <Link href="/servico" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+              <Link href="/servicos" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
                 Serviço
               </Link>
             </li>

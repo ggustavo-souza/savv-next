@@ -1,9 +1,9 @@
 'use client'
 
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import type { MarcadorServico } from "../types/Servico";
+import { useState } from "react";
 
 const customIcon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -16,15 +16,28 @@ const customIcon = L.icon({
   shadowSize: [41, 41]
 });
 
-export interface MapaExibicaoProps {
-    marcadores: MarcadorServico[]
+interface MapaSelecaoProps {
+    onLocationSelect: (lat: number, lng: number) => void;
 }
 
-export default function MapaExibicao({ marcadores }: MapaExibicaoProps) {
+function LocationMarker({ onLocationSelect }: MapaSelecaoProps) {
+    const [position, setPosition] = useState<L.LatLng | null>(null);
+
+    useMapEvents({
+        click(e) {
+            setPosition(e.latlng);
+            onLocationSelect(e.latlng.lat, e.latlng.lng);
+        },
+    });
+
+    return position === null ? null : (
+        <Marker position={position} icon={customIcon} />
+    );
+}
+
+export default function MapaSelecao({ onLocationSelect }: MapaSelecaoProps) {
     const COORDENADAS_VOTORANTIM: L.LatLngTuple = [-23.5466, -47.4382];
     
-    // sul e oeste: -23.6850, -47.4950
-    // norte e leste: -23.5110, -47.3110
     const limiteVotorantim: L.LatLngBoundsLiteral = [
         [-23.6850, -47.4950],
         [-23.5110, -47.3110]
@@ -34,27 +47,17 @@ export default function MapaExibicao({ marcadores }: MapaExibicaoProps) {
         <MapContainer 
             center={COORDENADAS_VOTORANTIM} 
             zoom={14} 
-            minZoom={14}
+            minZoom={13}
             maxZoom={16}
             maxBounds={limiteVotorantim}
             maxBoundsViscosity={1.0}
-            style={{ width: "100%", height: "100%", minHeight: "400px" }}
-            zoomControl={false}
-            keyboard={false}
+            style={{ width: "100%", height: "400px", borderRadius: "0.5rem", zIndex: 0 }}
         >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-
-            {marcadores.map((marcador) => (
-                <Marker 
-                    key={marcador.protocolo} 
-                    position={[marcador.coordenadas.lat, marcador.coordenadas.lng]}
-                    icon={customIcon}
-                    title={`ID: ${marcador.protocolo} - ${marcador.status}`}
-                />
-            ))}
+            <LocationMarker onLocationSelect={onLocationSelect} />
         </MapContainer>
     );
 }
