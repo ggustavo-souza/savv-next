@@ -43,7 +43,6 @@ export default function GraficoPizza({ dadosGrafico }: GraficoPizzaProps) {
 
   return (
     <>
-      <h2>Gráfico de Pizza</h2>
       <Pie data={data} options={options} />
     </>
   );
