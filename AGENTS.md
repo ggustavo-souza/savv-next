@@ -72,7 +72,7 @@ Aplicação desenvolvida para modernizar, organizar e dar transparência às sol
 - **Campos da Solicitação**:
   - `protocolo`: Identificador único da solicitação.
   - `data`: Data e hora do envio.
-  - `endereco`: Rua, número, bairro e CEP concatenados.
+  - `endereco`: Rua, bairro e CEP concatenados.
   - `observacao`: Descrição detalhada do problema.
   - `coordenadas`: Latitude e longitude para marcação no mapa.
   - `imagem`: Caminho/URL da foto anexada pelo cidadão.
