@@ -1,12 +1,12 @@
 import GraficoBarra from "../../components/GraficoBarra";
 import GraficoPizza from "../../components/GraficoPizza";
-import MapaExibicao from "../../components/MapaExibicao";
 import type { MarcadorServico } from "../../types/Servico";
 import { BsList } from "react-icons/bs";
 import ConverterNomeMes from "@/src/services/ConverterNomeMes";
 import type { Metadata } from "next";
 import { db } from "@/src/lib/db";
 import { servicos } from "@/src/lib/db/schema";
+import ContainerMapaTransparencia from "@/src/app/transparencia/ContainerMapaTransparencia";
 
 export const metadata: Metadata = {
     title: "SAVV - Transparência",
@@ -32,7 +32,7 @@ export default async function Transparencia() {
         atual.valor > maior.valor ? atual : maior
     ).chave;
 
-    const marcadoresSolicitacao: MarcadorServico[] = await db.select({protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria , coordenadas: {lat: servicos.lat, lng: servicos.lng}}).from(servicos)
+    const marcadoresSolicitacao: MarcadorServico[] = await db.select({ protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria, coordenadas: { lat: servicos.lat, lng: servicos.lng } }).from(servicos)
 
     return (
         <>
@@ -42,9 +42,7 @@ export default async function Transparencia() {
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-bold text-black leading-tight">Transparência de Dados</h1>
                     <p className="text-base sm:text-lg 2xl:text-2xl font-light text-secundaria">Zelamos pela transparência e integridade dos nossos dados em todas as nossas operações.</p>
                 </article>
-                <aside className="w-full lg:w-7/12 h-[50vh] sm:h-[60vh] lg:h-[70vh] border border-gray-400 flex rounded-sm items-center justify-center">
-                    <MapaExibicao marcadores={marcadoresSolicitacao} />
-                </aside>
+                <ContainerMapaTransparencia marcadores={marcadoresSolicitacao} />
             </div>
             <section className="my-10 px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
                 {/* {Div dos gráficos} */}

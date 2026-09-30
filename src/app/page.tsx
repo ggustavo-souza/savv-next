@@ -1,7 +1,7 @@
-import MapaExibicao from "../components/MapaExibicao";
 import { db } from "../lib/db";
 import { servicos } from "../lib/db/schema";
 import { MarcadorServico } from "../types/Servico";
+import ContainerMapaHome from "./ContainerMapaHome";
 
 export default async function Home() {
 
@@ -34,9 +34,7 @@ export default async function Home() {
                 </div>
             </section>
             <article className="flex flex-row mx-16 my-6 border border-gray-300 rounded-sm">
-                <div className="w-3/4 h-130 z-10">
-                    <MapaExibicao marcadores={marcadoresSolicitacao} />
-                </div>
+                <ContainerMapaHome marcadores={marcadoresSolicitacao} />
                 <aside className="w-1/4 self-center">
                     <div className="flex flex-col px-8">
                         <h1 className="border-b border-gray-400 font-semibold mb-6 pb-2">PARÂMETROS DE EXIBIÇÃO</h1>
