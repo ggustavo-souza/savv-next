@@ -76,7 +76,7 @@ export default async function Transparencia() {
                                 </div>
                             </div>
                         </header>
-                        <div className="w-full h-80 sm:h-96 2xl:h-[500px] flex self-center items-center rounded-sm justify-center shadow-lg py-4 px-2">
+                        <div className="w-full h-80 sm:h-96 2xl:h-125 flex self-center items-center rounded-sm justify-center shadow-lg py-4 px-2">
                             <GraficoBarra dadosGrafico={dadosGrafico} />
                         </div>
                     </div>
