@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     title: "SAVV - Transparência",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function Transparencia() {
 
     const dadosGrafico = [

@@ -1,4 +1,4 @@
-import { mysqlTable, varchar, timestamp, mysqlEnum, int } from 'drizzle-orm/mysql-core';
+import { mysqlTable, varchar, timestamp, mysqlEnum, int, double } from 'drizzle-orm/mysql-core';
 
 export const usuarios = mysqlTable('usuarios', {
     idUsuario: int('idUsuario').primaryKey().autoincrement(),
@@ -20,8 +20,8 @@ export const servicos = mysqlTable('servicos', {
     data: timestamp('data'),
     observacao: varchar('observacao', { length: 256 }).notNull(),
     endereco: varchar('endereco', { length: 60 }).notNull(),
-    lat: int('lat').notNull(),
-    lng: int('lng').notNull(),
+    lat: double('lat').notNull(),
+    lng: double('lng').notNull(),
     imagem: varchar('imagem', { length: 60 }).notNull(),
     status: mysqlEnum('status', ["pendente", "em_analise", "concluida", "cancelada"]).notNull().default('pendente'),
     categoria: mysqlEnum('categoria', ["poda", "plantio", "erradicacao", "rocagem"]).notNull(),

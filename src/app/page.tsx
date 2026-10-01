@@ -3,6 +3,8 @@ import { servicos } from "../lib/db/schema";
 import { MarcadorServico } from "../types/Servico";
 import ContainerMapaHome from "./ContainerMapaHome";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
 
     // funcionamento real para pegar solicitacoes de fato presentes no banco e colocá-las como marcadores
