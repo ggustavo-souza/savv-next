@@ -34,7 +34,17 @@ export default async function Transparencia() {
         atual.valor > maior.valor ? atual : maior
     ).chave;
 
-    const marcadoresSolicitacao: MarcadorServico[] = await db.select({ protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria, coordenadas: { lat: servicos.lat, lng: servicos.lng } }).from(servicos)
+    const marcadoresBanco = await db.select({ protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria, lat: servicos.lat, lng: servicos.lng }).from(servicos)
+
+    const marcadores: MarcadorServico[] = marcadoresBanco.map((marcador) => ({
+        protocolo: marcador.protocolo,
+        status: marcador.status,
+        categoria: marcador.categoria,
+        coordenadas: {
+            lat: marcador.lat,
+            lng: marcador.lng
+        }
+    }));
 
     return (
         <>
@@ -44,7 +54,7 @@ export default async function Transparencia() {
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-bold text-black leading-tight">Transparência de Dados</h1>
                     <p className="text-base sm:text-lg 2xl:text-2xl font-light text-secundaria">Zelamos pela transparência e integridade dos nossos dados em todas as nossas operações.</p>
                 </article>
-                <ContainerMapaTransparencia marcadores={marcadoresSolicitacao} />
+                <ContainerMapaTransparencia marcadores={marcadores} />
             </div>
             <section className="my-10 px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
                 {/* {Div dos gráficos} */}

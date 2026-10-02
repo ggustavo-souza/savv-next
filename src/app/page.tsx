@@ -9,7 +9,17 @@ export default async function Home() {
 
     // funcionamento real para pegar solicitacoes de fato presentes no banco e colocá-las como marcadores
 
-    const marcadoresSolicitacao: MarcadorServico[] = await db.select({protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria , coordenadas: {lat: servicos.lat, lng: servicos.lng}}).from(servicos)
+    const marcadoresBanco = await db.select({protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria , lat: servicos.lat, lng: servicos.lng}).from(servicos)
+
+    const marcadores: MarcadorServico[] = marcadoresBanco.map((marcador) => ({
+        protocolo: marcador.protocolo,
+        status: marcador.status,
+        categoria: marcador.categoria,
+        coordenadas: {
+            lat: marcador.lat,
+            lng: marcador.lng
+        }
+    }));
 
     return (
         <>
@@ -36,7 +46,7 @@ export default async function Home() {
                 </div>
             </section>
             <article className="flex flex-row mx-16 my-6 border border-gray-300 rounded-sm">
-                <ContainerMapaHome marcadores={marcadoresSolicitacao} />
+                <ContainerMapaHome marcadores={marcadores} />
                 <aside className="w-1/4 self-center">
                     <div className="flex flex-col px-8">
                         <h1 className="border-b border-gray-400 font-semibold mb-6 pb-2">PARÂMETROS DE EXIBIÇÃO</h1>
