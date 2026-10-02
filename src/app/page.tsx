@@ -1,6 +1,4 @@
-import { db } from "../lib/db";
-import { servicos } from "../lib/db/schema";
-import { MarcadorServico } from "../types/Servico";
+import getSolicitacoes from "../services/getSolicitacoes";
 import ContainerMapaHome from "./ContainerMapaHome";
 
 export const dynamic = 'force-dynamic';
@@ -9,17 +7,7 @@ export default async function Home() {
 
     // funcionamento real para pegar solicitacoes de fato presentes no banco e colocá-las como marcadores
 
-    const marcadoresBanco = await db.select({protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria , lat: servicos.lat, lng: servicos.lng}).from(servicos)
-
-    const marcadores: MarcadorServico[] = marcadoresBanco.map((marcador) => ({
-        protocolo: marcador.protocolo,
-        status: marcador.status,
-        categoria: marcador.categoria,
-        coordenadas: {
-            lat: marcador.lat,
-            lng: marcador.lng
-        }
-    }));
+    const marcadores = await getSolicitacoes();
 
     return (
         <>
