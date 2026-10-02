@@ -44,6 +44,24 @@ export async function obterSessao() {
 
     try {
         const { payload } = await jwtVerify(token, JWT_SECRET);
+
+        if (!payload.userId) {
+            return null;
+        };
+
+        if(payload.exp && Date.now() >= payload.exp * 1000) {
+            cookiesSessao.delete('session');
+            return null;
+        }
+
+        const [user] = await db.select().from(usuarios).where(eq(usuarios.idUsuario, payload.userId as number)).limit(1)
+
+        if(!user){
+            cookiesSessao.delete('session');
+            return null;
+        }
+
+
         return {
             userId: payload.userId as number,
             cargo: payload.cargo as string | null,
