@@ -19,10 +19,10 @@ export const servicos = mysqlTable('servicos', {
     protocolo: int('protocolo').primaryKey().autoincrement(),
     data: timestamp('data'),
     observacao: varchar('observacao', { length: 256 }).notNull(),
-    endereco: varchar('endereco', { length: 60 }).notNull(),
+    endereco: varchar('endereco', { length: 200 }).notNull(),
     lat: double('lat').notNull(),
     lng: double('lng').notNull(),
-    imagem: varchar('imagem', { length: 60 }).notNull(),
+    imagem: varchar('imagem', { length: 256 }).notNull(),
     status: mysqlEnum('status', ["pendente", "em_analise", "concluida", "cancelada"]).notNull().default('pendente'),
     categoria: mysqlEnum('categoria', ["poda", "plantio", "erradicacao", "rocagem"]).notNull(),
     idUsuario: int("idUsuario").references(() => usuarios.idUsuario)
