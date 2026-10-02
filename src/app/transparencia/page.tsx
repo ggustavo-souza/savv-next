@@ -1,11 +1,9 @@
 import GraficoBarra from "../../components/GraficoBarra";
 import GraficoPizza from "../../components/GraficoPizza";
-import type { MarcadorServico } from "../../types/Servico";
+import getSolicitacoes from "../../services/getSolicitacoes";
 import { BsList } from "react-icons/bs";
 import ConverterNomeMes from "@/src/services/ConverterNomeMes";
 import type { Metadata } from "next";
-import { db } from "@/src/lib/db";
-import { servicos } from "@/src/lib/db/schema";
 import ContainerMapaTransparencia from "@/src/app/transparencia/ContainerMapaTransparencia";
 
 export const metadata: Metadata = {
@@ -34,17 +32,7 @@ export default async function Transparencia() {
         atual.valor > maior.valor ? atual : maior
     ).chave;
 
-    const marcadoresBanco = await db.select({ protocolo: servicos.protocolo, status: servicos.status, categoria: servicos.categoria, lat: servicos.lat, lng: servicos.lng }).from(servicos)
-
-    const marcadores: MarcadorServico[] = marcadoresBanco.map((marcador) => ({
-        protocolo: marcador.protocolo,
-        status: marcador.status,
-        categoria: marcador.categoria,
-        coordenadas: {
-            lat: marcador.lat,
-            lng: marcador.lng
-        }
-    }));
+    const marcadores = await getSolicitacoes();
 
     return (
         <>
