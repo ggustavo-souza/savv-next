@@ -1,8 +1,8 @@
 'use server'
 
-import { db } from "@/src/lib/db";
-import { servicos } from "@/src/lib/db/schema";
-import { obterSessao } from "@/src/services/AuthCheck";
+import { db } from "@/lib/db";
+import { servicos } from "@/lib/db/schema";
+import { obterSessao } from "@/services/AuthCheck";
 import { redirect } from "next/navigation";
 
 export type CriarServicoState = {

@@ -1,9 +1,9 @@
 'use client'
 
-import { MapaExibicaoProps } from "@/src/components/MapaExibicao"
+import { MapaExibicaoProps } from "@/components/MapaExibicao"
 import dynamic from "next/dynamic"
 
-const MapaExibicao = dynamic(() => import("@/src/components/MapaExibicao"), { ssr: false })
+const MapaExibicao = dynamic(() => import("@/components/MapaExibicao"), { ssr: false })
 
 export default function ContainerMapaTransparencia({ marcadores }: MapaExibicaoProps) {
     return (

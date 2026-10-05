@@ -66,7 +66,7 @@ export async function obterSessao() {
             userId: payload.userId as number,
             cargo: payload.cargo as string | null,
         };
-    } catch (e) {
+    } catch {
         return null;
     }
 }

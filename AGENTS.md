@@ -46,11 +46,12 @@ Aplicação desenvolvida para modernizar, organizar e dar transparência às sol
 2. **Forma de Desenvolvimento BackEnd**:
     - O backend deste projeto deve ser desenvolvido utilizando de Server Actions e Server Components. Sem a utilização de rotas como no padrão Route Handlers.
 
-3. **Organização de Diretórios (`src/`)**:
-   - `src/app/`: Rotas, páginas e layouts do App Router.
-   - `src/components/`: Componentes reutilizáveis de interface.
-   - `src/services/`: Regras de negócio utilitárias, formatação e integrações.
-   - `src/types/`: Interfaces e tipos TypeScript compartilhados.
+3. **Organização de Diretórios**:
+   - `app/`: Rotas, páginas e layouts do App Router.
+   - `components/`: Componentes reutilizáveis de interface.
+   - `lib/`: Conexão com banco de dados, schemas e configurações de infraestrutura.
+   - `services/`: Regras de negócio utilitárias, formatação e integrações.
+   - `types/`: Interfaces e tipos TypeScript compartilhados.
 
 4. **Padrões de Código**:
    - Manter código limpo e com tipagem estrita (TypeScript).

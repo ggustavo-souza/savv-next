@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 
 import { Bar } from 'react-chartjs-2'; //representa o componente da barra que vai ser renderizado
-import ChartDataLabels from 'chartjs-plugin-datalabels'; // representa o plugin que vai colocar os números em cima das barras
+import ChartDataLabels, { type Context } from 'chartjs-plugin-datalabels'; // representa o plugin que vai colocar os números em cima das barras
 
 interface GraficoBarraProps {
     dadosGrafico: {chave: string, valor: number}[];
@@ -56,9 +56,9 @@ export default function GraficoBarra({dadosGrafico}: GraficoBarraProps) {
                 align: 'top', // fala pros números ficarem em cima da barra
                 font: { weight: 'bold', size: 12, family: 'Poppins' }, // fonte do número
                 // Lógica para colorir o texto do label em destaque
-                color: (context: any) => {
+                color: (context: Context) => {
                     const valor = context.dataset.data[context.dataIndex];
-                    const maiorValor = Math.max(...context.dataset.data);
+                    const maiorValor = Math.max(...(context.dataset.data as number[]));
 
                     return valor === maiorValor ? '#054100' : '#4b5563'; // Verde escuro para o destaque, cinza para os outros
                 },

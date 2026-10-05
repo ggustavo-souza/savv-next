@@ -11,8 +11,8 @@
     "drizzle:push": "drizzle-kit push --force",
     "drizzle:generate": "drizzle-kit generate",
     "drizzle:migrate": "drizzle-kit migrate",
-    "drizzle:seed": "tsx src/lib/db/seed.ts",
-    "drizzle:run": "tsx src/lib/db/index.ts"
+    "drizzle:seed": "tsx lib/db/seed.ts",
+    "drizzle:run": "tsx lib/db/index.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

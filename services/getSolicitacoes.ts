@@ -1,5 +1,5 @@
-import { db } from "@/src/lib/db";
-import { servicos } from "@/src/lib/db/schema";
+import { db } from "@/lib/db";
+import { servicos } from "@/lib/db/schema";
 import { MarcadorServico } from "../types/Servico";
 
 export default async function getSolicitacoes() {

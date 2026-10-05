@@ -1,9 +1,9 @@
 'use server'
 
-import { db } from "@/src/lib/db"
+import { db } from "@/lib/db"
 import { eq } from "drizzle-orm"
-import { usuarios } from "@/src/lib/db/schema"
-import { verificarSenha, criarCookieSessao } from "@/src/lib/auth/auth"
+import { usuarios } from "@/lib/db/schema"
+import { verificarSenha, criarCookieSessao } from "@/lib/auth/auth"
 import { redirect } from "next/navigation"
 
 export type LoginState = {

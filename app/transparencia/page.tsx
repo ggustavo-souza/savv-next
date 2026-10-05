@@ -2,9 +2,9 @@ import GraficoBarra from "../../components/GraficoBarra";
 import GraficoPizza from "../../components/GraficoPizza";
 import getSolicitacoes from "../../services/getSolicitacoes";
 import { BsList } from "react-icons/bs";
-import ConverterNomeMes from "@/src/services/ConverterNomeMes";
+import ConverterNomeMes from "@/services/ConverterNomeMes";
 import type { Metadata } from "next";
-import ContainerMapaTransparencia from "@/src/app/transparencia/ContainerMapaTransparencia";
+import ContainerMapaTransparencia from "@/app/transparencia/ContainerMapaTransparencia";
 
 export const metadata: Metadata = {
     title: "SAVV - Transparência",

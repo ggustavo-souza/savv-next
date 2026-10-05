@@ -1,10 +1,10 @@
 'use server'
 
-import { db } from "@/src/lib/db"
+import { db } from "@/lib/db"
 import { eq } from "drizzle-orm"
-import { usuarios } from "@/src/lib/db/schema"
-import { hashSenha } from "@/src/lib/auth/auth"
-import { UsuarioBD } from "@/src/types/Usuario"
+import { usuarios } from "@/lib/db/schema"
+import { hashSenha } from "@/lib/auth/auth"
+import { UsuarioBD } from "@/types/Usuario"
 import { redirect } from "next/navigation"
 
 export type RegisterState = {

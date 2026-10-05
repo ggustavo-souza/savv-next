@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { redirect } from 'next/navigation'
-import { checarAutenticacao } from '@/src/services/AuthCheck'
+import { checarAutenticacao } from '@/services/AuthCheck'
 import FormServico from './FormServico'
 
 export const metadata: Metadata = {

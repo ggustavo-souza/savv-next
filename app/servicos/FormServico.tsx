@@ -2,10 +2,10 @@
 
 import { useActionState, useState } from "react";
 import dynamic from 'next/dynamic';
-import { criarServicoAction } from "@/src/app/actions/criarServico";
+import { criarServicoAction } from "@/app/actions/criarServico";
 
 // Mapa dependente do window, deve ser importado via dynamic com ssr: false
-const MapaSelecao = dynamic(() => import('@/src/components/MapaSelecao'), { ssr: false });
+const MapaSelecao = dynamic(() => import('@/components/MapaSelecao'), { ssr: false });
 
 export default function FormServico() {
     const [state, action, isPending] = useActionState(criarServicoAction, null);

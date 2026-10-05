@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { registerAction } from "@/src/app/actions/registrar";
+import { registerAction } from "@/app/actions/registrar";
 import { useActionState } from "react";
 
 export default function Registrar() {

@@ -1,5 +1,5 @@
 // import { db } from ".";
-// import type { ServicoBD } from "@/src/types/Servico";
+// import type { ServicoBD } from "@/types/Servico";
 // import * as schema from "./schema";
 
 // const teste = await db.select().from(schema.usuarios);
