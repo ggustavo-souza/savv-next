@@ -4,6 +4,7 @@ export const usuarios = mysqlTable('usuarios', {
     idUsuario: int('idUsuario').primaryKey().autoincrement(),
     nome: varchar('nome', { length: 50 }).notNull(),
     email: varchar('email', { length: 150 }).notNull().unique(),
+    foto: varchar('foto', { length: 256 }),
     senha: varchar('senha', { length: 256 }).notNull(),
 });
 

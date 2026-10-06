@@ -3,10 +3,12 @@ export type Usuario = {
     nome: string;
     email: string;
     senha: string;
+    foto?: string | null;
 }
 
 export type UsuarioBD = {
     nome: string;
     email: string;
-    senha: string
+    senha: string;
+    foto?: string | null;
 }
