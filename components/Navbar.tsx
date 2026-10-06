@@ -34,7 +34,7 @@ export default function Navbar({ tipo }: NavbarProps) {
             </li>
             <li>
               <Link
-                href="/login"
+                href="/login/usuario"
                 className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90"
               >
                 Login
@@ -72,7 +72,7 @@ export default function Navbar({ tipo }: NavbarProps) {
         {tipo === "diretor" && (
           <ul className="flex items-center gap-6">
             <li>
-              <Link href="/servicos" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+              <Link href="/" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
                 Gerenciar Funcionários
               </Link>
             </li>
@@ -89,18 +89,13 @@ export default function Navbar({ tipo }: NavbarProps) {
         {tipo === "fiscal" && (
           <ul className="flex items-center gap-6">
             <li>
-              <Link href="/transparencia" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
-                Transparência
-              </Link>
-            </li>
-            <li>
-              <Link href="/servicos" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
-                Serviço
+              <Link href="/" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+                Painel
               </Link>
             </li>
             <li>
               <Link
-                href="/login"
+                href="/logout"
                 className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90"
               >
                 Sair
@@ -112,22 +107,17 @@ export default function Navbar({ tipo }: NavbarProps) {
           <ul className="flex items-center gap-6">
             <li>
               <Link href={'/'} className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
-                
+                Painel
               </Link>
             </li>
             <li>
-              <Link href="/transparencia" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
-                Transparência
-              </Link>
-            </li>
-            <li>
-              <Link href="/servicos" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
-                Serviço
+              <Link href="/solicitacoes" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+                Solicitações
               </Link>
             </li>
             <li>
               <Link
-                href="/login"
+                href="/logout"
                 className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90"
               >
                 Sair
