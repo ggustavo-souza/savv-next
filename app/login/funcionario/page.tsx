@@ -4,10 +4,10 @@ import Link from "next/link";
 import { loginAction } from "@/app/actions/login";
 import { useActionState } from "react";
 
-export default function Login() {
+export default function LoginFuncionario() {
 
-    const loginComoUsuario = loginAction.bind(null, 'usuario')
-    const [state, formAction, estaPendente] = useActionState(loginComoUsuario, null);
+    const loginComoFuncionario = loginAction.bind(null, 'funcionario')
+    const [state, formAction, estaPendente] = useActionState(loginComoFuncionario, null);
 
     return (
         <>
@@ -45,7 +45,7 @@ export default function Login() {
                         <p>Não possui conta? <Link className="font-bold text-lg underline text-secundaria" href={"registrar"}>Registre-se agora.</Link></p>
                     </span>
                 </div>
-                <Link href={"/login/funcionario"} className="text-md my-4 underline text-secundaria">Entrar como Funcionário</Link>
+                <Link href={"/login/usuario"} className="text-md my-4 underline text-secundaria">Entrar como Usuário</Link>
             </main>
         </>
     )

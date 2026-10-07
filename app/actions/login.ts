@@ -2,7 +2,7 @@
 
 import { db } from "@/lib/db"
 import { eq } from "drizzle-orm"
-import { usuarios } from "@/lib/db/schema"
+import { usuarios, funcionario } from "@/lib/db/schema"
 import { verificarSenha, criarCookieSessao } from "@/lib/auth/auth"
 import { redirect } from "next/navigation"
 
@@ -11,32 +11,42 @@ export type LoginState = {
     success?: boolean
 } | null
 
-export async function loginAction(_prevState: LoginState, formData: FormData): Promise<LoginState> {
-    // pega os elementos do objeto FormData enviado pela requisição
+export async function loginAction(tipo: 'usuario' | 'funcionario', _prevState: LoginState, formData: FormData): Promise<LoginState> {
     const email = formData.get('email') as string
     const senha = formData.get('senha') as string
 
-    // ja retorna erro caso nao tenha email ou senha
     if (!email || !senha) {
         return { error: 'Preencha todos os campos.' };
     }
 
-    // aqui checa no banco de dados se existe algum usuário onde o email bata com o enviado na requisicao
+    if (tipo === 'funcionario') {
+        const [func] = await db.select().from(funcionario).where(eq(funcionario.email, email)).limit(1)
+
+        if (!func) {
+            return { error: "Credenciais Inválidas" }
+        }
+
+        const validarSenha = await verificarSenha(senha, func.senha)
+
+        if (!validarSenha)
+            return { error: "A senha digitada está incorreta" }
+
+        await criarCookieSessao(func.idFuncionario, func.cargo)
+        redirect("/")
+    }
+
+    // Fluxo padrão: tabela usuarios
     const [usuario] = await db.select().from(usuarios).where(eq(usuarios.email, email)).limit(1)
 
-    // se nao tiver já da erro
     if (!usuario) {
         return { error: "Credenciais Inválidas" }
     }
-    // aqui verifica se a senha registrada (com hash) vai bater com a que o usuário digitou
+
     const validarSenha = await verificarSenha(senha, usuario.senha)
 
-    // se retornar false é pq não bateu ai ja da erro
     if (!validarSenha)
         return { error: "A senha digitada está incorreta" }
 
-    // aqui cria o cookie da sessão se der tudo certo e retorna true
     await criarCookieSessao(usuario.idUsuario, null)
-
     redirect("/")
 }

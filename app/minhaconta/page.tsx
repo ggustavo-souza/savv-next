@@ -12,7 +12,7 @@ export default async function MinhaConta() {
     const auth = await checarAutenticacao();
 
     if (!auth) {
-        redirect('/login');
+        redirect('/login/usuario');
     }
 
     const foto = auth.user.foto && auth.user.foto.trim() !== ''
