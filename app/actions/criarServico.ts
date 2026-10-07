@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { servicos } from "@/lib/db/schema";
 import { obterSessao } from "@/services/AuthCheck";
 import { redirect } from "next/navigation";
-import path from "path/win32";
+import path from "path";
 import fs from "fs";
 
 export type CriarServicoState = {
@@ -55,7 +55,8 @@ export async function criarServicoAction(_prevState: CriarServicoState, formData
     const extensao = path.extname(imagem.name).toLowerCase() || '.jpg';
     const nomeArquivo = `${crypto.randomUUID()}_${Date.now()}${extensao}`;
 
-    const pastaDestino = path.join('/repository');
+    const pastaDestino = path.join(process.cwd(), 'public', 'repository');
+    await fs.promises.mkdir(pastaDestino, { recursive: true });
 
     const buffer = Buffer.from(await imagem.arrayBuffer());
     const caminhoArquivo = path.join(pastaDestino, nomeArquivo);
@@ -68,7 +69,7 @@ export async function criarServicoAction(_prevState: CriarServicoState, formData
             endereco,
             lat,
             lng,
-            imagem: caminhoArquivo,
+            imagem: nomeArquivo,
             status: 'pendente',
             categoria,
             data: new Date(),

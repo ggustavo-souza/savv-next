@@ -17,7 +17,7 @@ export default async function MinhaConta() {
 
     const foto = auth.user.foto && auth.user.foto.trim() !== ''
         ? auth.user.foto
-        : 'Sem_Imagem.jpg';
+        : 'Sem_imagem.jpg';
 
     return (
         <main className="min-h-screen py-10 px-4 bg-primaria">
