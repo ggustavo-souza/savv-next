@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { checarAutenticacao } from '@/services/AuthCheck';
 import FormFotoPerfil from './FormFotoPerfil';
+import SolicitacoesUsuario from './SolicitacoesUsuario';
 
 export const metadata: Metadata = {
     title: 'SAVV - Minha Conta',
@@ -37,6 +38,9 @@ export default async function MinhaConta() {
                         </div>
                     </header>
                 </div>
+                <section>
+                    <SolicitacoesUsuario idUsuario={auth.user.idUsuario} />
+                </section>
             </section>
         </main>
     );

@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { servicos } from "@/lib/db/schema";
 import { obterSessao } from "@/services/AuthCheck";
 import { redirect } from "next/navigation";
+import path from "path/win32";
+import fs from "fs";
 
 export type CriarServicoState = {
     error?: string;
@@ -12,7 +14,7 @@ export type CriarServicoState = {
 
 export async function criarServicoAction(_prevState: CriarServicoState, formData: FormData): Promise<CriarServicoState> {
     const sessao = await obterSessao();
-    
+
     if (!sessao || !sessao.userId) {
         return { error: 'Usuário não autenticado.' };
     }
@@ -35,13 +37,30 @@ export async function criarServicoAction(_prevState: CriarServicoState, formData
         return { error: 'Coordenadas inválidas.' };
     }
 
-    // Processamento da imagem (simplificado para o escopo do app)
-    let caminhoImagem = '';
-    if (imagem && imagem.size > 0) {
-        caminhoImagem = `/uploads/${Date.now()}-${imagem.name}`;
-    } else {
-        return { error: 'É obrigatório enviar uma imagem da ocorrência.' };
+    // Processamento da imagem
+    if (!imagem || imagem.size === 0) {
+        return { error: 'Selecione uma imagem válida para atualizar sua imagem.' };
     }
+
+    const tiposPermitidos = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    if (!tiposPermitidos.includes(imagem.type)) {
+        return { error: 'Formato de arquivo não suportado. Envie JPG, PNG ou WEBP.' };
+    }
+
+    const tamanhoMaximo = 5 * 1024 * 1024; // 5MB
+    if (imagem.size > tamanhoMaximo) {
+        return { error: 'O tamanho da imagem não pode ultrapassar 5MB.' };
+    }
+
+    const extensao = path.extname(imagem.name).toLowerCase() || '.jpg';
+    const nomeArquivo = `${crypto.randomUUID()}_${Date.now()}${extensao}`;
+
+    const pastaDestino = path.join('/repository');
+
+    const buffer = Buffer.from(await imagem.arrayBuffer());
+    const caminhoArquivo = path.join(pastaDestino, nomeArquivo);
+    await fs.promises.writeFile(caminhoArquivo, buffer);
+
 
     try {
         await db.insert(servicos).values({
@@ -49,7 +68,7 @@ export async function criarServicoAction(_prevState: CriarServicoState, formData
             endereco,
             lat,
             lng,
-            imagem: caminhoImagem,
+            imagem: caminhoArquivo,
             status: 'pendente',
             categoria,
             data: new Date(),
