@@ -1,6 +1,6 @@
 import GraficoBarra from "../../components/GraficoBarra";
 import GraficoPizza from "../../components/GraficoPizza";
-import getSolicitacoes from "../../services/getSolicitacoes";
+import { getSolicitacoes } from "../../services/getSolicitacoes";
 import { BsList } from "react-icons/bs";
 import ConverterNomeMes from "@/services/ConverterNomeMes";
 import type { Metadata } from "next";

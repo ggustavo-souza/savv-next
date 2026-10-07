@@ -1,4 +1,4 @@
-import getSolicitacoes from "../services/getSolicitacoes";
+import { getSolicitacoes } from "../services/getSolicitacoes";
 import ContainerMapaHome from "./ContainerMapaHome";
 
 export const dynamic = 'force-dynamic';
