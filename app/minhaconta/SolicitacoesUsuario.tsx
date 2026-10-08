@@ -24,17 +24,20 @@ export default function SolicitacoesUsuario({ idUsuario }: SolicitacoesUsuarioPr
 
     return (
         <div>
-            <h1>Solicitações do Usuário</h1>
             {solicitacoes && solicitacoes.length > 0 ? (
-                <div>
+                <div className="space-y-4 flex flex-col">
                     {solicitacoes.map((solicitacao) => (
-                        <div key={solicitacao.protocolo} className="border-b border-gray-200 py-4">
-                            <p>Protocolo: {solicitacao.protocolo}</p>
-                            <p>Status: {solicitacao.status}</p>
-                            <Image src={`/repository/${solicitacao.imagem}`} alt="Foto da solicitação" width={200} height={200} />
-                            <textarea readOnly value={solicitacao.observacao} className="w-full h-20 p-2 border rounded-md resize-none" />
-                            <p>Categoria: {solicitacao.categoria}</p>
-                            <p>Endereço: {solicitacao.endereco}</p>
+                        <div key={solicitacao.protocolo} className="border border-gray-200 flex p-4 flex-row">
+                            <div className="flex flex-col w-full space-y-2 me-4">
+                                <div className="flex flex-row w-full gap-3">
+                                    <p className="px-3 py-1 bg-gray-500 text-white rounded-xs">#{solicitacao.protocolo}</p>
+                                    <p className={`px-3 py-1 ${solicitacao.categoria === 'poda' || solicitacao.categoria === 'rocagem' ? 'bg-warning' : solicitacao.categoria === 'erradicacao' ? 'bg-error' : 'bg-secundaria'} font-semibold text-white rounded-xs`}>{solicitacao.categoria.toUpperCase()}</p>
+                                    <p className={`px-3 py-1 ${solicitacao.status === 'concluida' ? 'bg-secundaria' : solicitacao.status === 'pendente' ? 'bg-warning' : 'bg-error'} text-white rounded-xs font-semibold`}>{solicitacao.status.toUpperCase()}</p>
+                                </div>
+                                <textarea readOnly value={solicitacao.observacao} className="w-full h-20 p-2 border rounded-md resize-none" />
+                                <p>Endereço: {solicitacao.endereco}</p>
+                            </div>
+                            <Image className="object-cover rounded-xs" src={`/repository/${solicitacao.imagem}`} alt="Foto da solicitação" width={200} height={200} />
                         </div>
                     ))}
                     <button onClick={async () => {

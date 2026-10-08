@@ -21,8 +21,8 @@ export default async function MinhaConta() {
 
     return (
         <main className="min-h-screen py-10 px-4 bg-primaria">
-            <section className="max-w-3xl mx-auto">
-                <div className="bg-white p-6 md:p-8 rounded-xs shadow-sm border border-gray-200 flex flex-col gap-8">
+            <section className="justify-center items-center flex flex-col gap-8">
+                <div className="max-w-3xl bg-white p-6 md:p-8 rounded-xs shadow-sm border border-gray-200 flex flex-col gap-8">
                     <header className="flex flex-col sm:flex-row items-center sm:items-start pb-6 border-gray-100 ">
                         <FormFotoPerfil
                             fotoAtual={foto}
@@ -39,6 +39,14 @@ export default async function MinhaConta() {
                     </header>
                 </div>
                 <section>
+                    <div className="flex flex-row w-full justify-between items-center mb-6 border-b border-gray-300">
+                        <h2 className="text-lg font-bold text-gray-500">MINHAS SOLICITAÇÕES</h2>
+                        <div className="flex flex-row gap-3 text-gray-500">
+                            <button>Todas</button>
+                            <button>Em andamento</button>
+                            <button>Concluídas</button>
+                        </div>
+                    </div>
                     <SolicitacoesUsuario idUsuario={auth.user.idUsuario} />
                 </section>
             </section>
