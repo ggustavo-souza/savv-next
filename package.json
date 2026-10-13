@@ -8,10 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "drizzle:push": "drizzle-kit push",
+    "drizzle:push": "drizzle-kit push && tsx lib/db/seed.ts",
     "drizzle:generate": "drizzle-kit generate",
     "drizzle:migrate": "drizzle-kit migrate",
-    "drizzle:seed": "tsx lib/db/seed.ts",
     "drizzle:run": "tsx lib/db/index.ts"
   },
   "dependencies": {
