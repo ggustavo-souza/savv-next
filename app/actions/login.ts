@@ -32,7 +32,14 @@ export async function loginAction(tipo: 'usuario' | 'funcionario', _prevState: L
             return { error: "A senha digitada está incorreta" }
 
         await criarCookieSessao(func.idFuncionario, func.cargo)
-        redirect("/")
+
+        if (func.cargo === 'diretor') {
+            redirect("/admin/diretor")
+        } else if (func.cargo === 'fiscal') {
+            redirect("/admin/fiscal")
+        } else {
+            redirect("/admin/gerente")
+        }
     }
 
     // Fluxo padrão: tabela usuarios
