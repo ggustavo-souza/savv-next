@@ -12,7 +12,7 @@ export const funcionario = mysqlTable('funcionarios', {
     idFuncionario: int('idFuncionario').primaryKey().autoincrement(),
     nome: varchar('nome', { length: 50 }).notNull(),
     email: varchar('email', { length: 150 }).notNull().unique(),
-    data_cad: timestamp('data_cad').defaultNow().notNull(),
+    dataCadastro: timestamp('dataCadastro').defaultNow().notNull(),
     senha: varchar('senha', { length: 256 }).notNull(),
     cargo: mysqlEnum('cargo', ["diretor", "gerente", "fiscal"]).notNull(),
 })
@@ -28,4 +28,12 @@ export const servicos = mysqlTable('servicos', {
     status: mysqlEnum('status', ["pendente", "em_analise", "concluida", "cancelada"]).notNull().default('pendente'),
     categoria: mysqlEnum('categoria', ["poda", "plantio", "erradicacao", "rocagem"]).notNull(),
     idUsuario: int("idUsuario").references(() => usuarios.idUsuario)
+})
+
+export const historico = mysqlTable('historico', {
+    id_historico: int('id_historico').primaryKey().autoincrement(),
+    data: timestamp('data').defaultNow().notNull(),
+    atualizacao: varchar('atualizacao', { length: 256 }).notNull(),
+    protocolo: int('protocolo').references(() => servicos.protocolo), //id do servico que sofreu atualizacao
+    idFuncionario: int('idFuncionario').references(() => funcionario.idFuncionario) //id do funcionario que realizou a atualizacao
 })
