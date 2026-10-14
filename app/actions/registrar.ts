@@ -66,5 +66,5 @@ export async function registerAction(
         return { error: 'Ocorreu um erro ao processar o registro. Tente novamente mais tarde.' }
     }
 
-    redirect('/login')
+    redirect('/login/usuario')
 }

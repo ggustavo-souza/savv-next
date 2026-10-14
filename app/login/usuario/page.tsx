@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { loginAction } from "@/app/actions/login";
 import { useActionState } from "react";
+import { redirect } from "next/navigation";
 
 export default function Login() {
 
@@ -42,7 +43,7 @@ export default function Login() {
                         </div>
                     </form>
                     <span className="text-center mt-4">
-                        <p>Não possui conta? <Link className="font-bold text-lg underline text-secundaria" href={"registrar"}>Registre-se agora.</Link></p>
+                        <p>Não possui conta? <span className="font-bold text-lg cursor-pointer underline text-secundaria" onClick={() => redirect("/registrar")}>Registre-se agora.</span></p>
                     </span>
                 </div>
                 <Link href={"/login/funcionario"} className="text-md my-4 underline text-secundaria">Entrar como Funcionário</Link>
