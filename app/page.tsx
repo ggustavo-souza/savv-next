@@ -1,3 +1,5 @@
+import { checarAutenticacao } from "@/services/AuthCheck";
+import { redirect } from "next/navigation";
 import { getSolicitacoes } from "../services/getSolicitacoes";
 import ContainerMapaHome from "./ContainerMapaHome";
 
@@ -6,8 +8,18 @@ export const dynamic = 'force-dynamic';
 export default async function Home() {
 
     // funcionamento real para pegar solicitacoes de fato presentes no banco e colocá-las como marcadores
-
     const marcadores = await getSolicitacoes();
+
+    // checagem pra ver se tem token de login e se tiver redirecionar pra página correta
+    const auth = await checarAutenticacao();
+
+    if (auth && auth.cargo === 'diretor') {
+        redirect('/admin/diretor');
+    } else if (auth && auth.cargo === 'gerente') {
+        redirect('/admin/gerente');
+    } else if (auth && auth.cargo === 'fiscal') {
+        redirect('/admin/fiscal')
+    }
 
     return (
         <>

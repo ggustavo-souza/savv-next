@@ -19,7 +19,7 @@ export default function LoginFuncionario() {
                         <h2 className="text-2xl font-semibold">Entrar na sua conta</h2>
                     </div>
 
-                    <form action={formAction} className="flex flex-col mt-4 py-4 pb-6 border-b border-b-secundaria">
+                    <form action={formAction} className="flex flex-col mt-4 py-4 pb-6">
                         <section className="flex gap-4 flex-col">
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="email" className="text-gray-400 font-medium text-xs">ENDEREÇO DE EMAIL</label>
@@ -41,9 +41,6 @@ export default function LoginFuncionario() {
                             </button>
                         </div>
                     </form>
-                    <span className="text-center mt-4">
-                        <p>Não possui conta? <Link className="font-bold text-lg underline text-secundaria" href={"registrar"}>Registre-se agora.</Link></p>
-                    </span>
                 </div>
                 <Link href={"/login/usuario"} className="text-md my-4 underline text-secundaria">Entrar como Usuário</Link>
             </main>
