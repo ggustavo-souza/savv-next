@@ -6,6 +6,9 @@ export type Funcionario = {
     cargo: "diretor" | "gerente" | "fiscal"
 }
 
+// tipo seguro para enviar ao client (sem senha)
+export type FuncionarioSeguro = Omit<Funcionario, 'senha'>
+
 export type FuncionarioBD = {
     nome: string;
     email: string;

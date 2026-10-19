@@ -1,12 +1,41 @@
 'use client'
 
 import { FaPlus } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import FormCriarFuncionario from "./FormCriarFuncionario";
+import { getFuncionarios } from "@/services/getFuncionarios";
+import { FuncionarioSeguro } from "@/types/Funcionario";
 
 export default function DiretorHomeBody() {
 
     const [showForm, setShowForm] = useState(false);
+    const [funcionarios, setFuncionarios] = useState<FuncionarioSeguro[]>([]);
+    const [carregando, setCarregando] = useState(true);
+
+    const carregarFuncionarios = useCallback(async () => {
+        try {
+            setCarregando(true)
+            const lista = await getFuncionarios()
+            setFuncionarios(lista)
+        } catch (e) {
+            console.error('Erro ao carregar funcionários:', e)
+        } finally {
+            setCarregando(false)
+        }
+    }, [])
+
+    useEffect(() => {
+        carregarFuncionarios()
+    }, [carregarFuncionarios])
+
+    const formatarCargo = (cargo: string) => {
+        const cargos: Record<string, string> = {
+            diretor: 'Diretor',
+            gerente: 'Gerente',
+            fiscal: 'Fiscal',
+        }
+        return cargos[cargo] ?? cargo
+    }
 
     return (
         <>
@@ -23,11 +52,33 @@ export default function DiretorHomeBody() {
                     Adicionar Funcionário
                 </button>
             </header>
+            <section className="mx-12">
+                {carregando ? (
+                    <p className="text-gray-500">Carregando funcionários...</p>
+                ) : funcionarios.length === 0 ? (
+                    <p className="text-gray-500">Nenhum funcionário cadastrado.</p>
+                ) : (
+                        <div className="flex flex-row gap-4">
+                            {funcionarios.map((func) => (
+                                <div key={func.idFuncionario} className="border-b gap-2 px-6 py-6 shadow-sm border-t border-t-gray-100 border-gray-200 hover:bg-gray-50 transition-colors w-1/3">
+                                        <span className={`${func.cargo === "gerente" || func.cargo === "diretor" ? "bg-secundaria/10 text-secundaria" : "bg-blue-100 text-blue-900"} text-sm font-semibold px-3 py-1 rounded-md`}>
+                                            {formatarCargo(func.cargo)}
+                                        </span>
+                                    <p className=" mt-4 text-gray-600">{func.email}</p>
+                                    <h1 className=" font-semibold text-xl">{func.nome}</h1>
+                                </div>
+                            ))}
+                        </div>
+                )}
+            </section>
             {showForm && (
                 <div className="z-50 fixed inset-0 flex items-center justify-center">
                     <div className="fixed inset-0 bg-black/60" onClick={() => setShowForm(false)} />
                     <div className="relative z-10">
-                        <FormCriarFuncionario onClose={() => setShowForm(false)} />
+                        <FormCriarFuncionario
+                            onClose={() => setShowForm(false)}
+                            onSuccess={carregarFuncionarios}
+                        />
                     </div>
                 </div>
             )}
