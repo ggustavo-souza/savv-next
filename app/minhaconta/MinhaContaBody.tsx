@@ -1,6 +1,6 @@
 'use client'
 
-import { checarAutenticacao } from "@/services/AuthCheck";
+import { usuarios } from "@/lib/db/schema";
 import FormFotoPerfil from "./FormFotoPerfil";
 import { useState, useEffect } from "react";
 import { getSolicitacoesUsuario } from "@/services/getSolicitacoes";
@@ -8,7 +8,10 @@ import { FaAngleDown } from "react-icons/fa6";
 import Image from "next/image";
 
 interface MinhaContaBodyProps {
-    auth: Exclude<Awaited<ReturnType<typeof checarAutenticacao>>, false | undefined>;
+    auth: {
+        user: typeof usuarios.$inferSelect;
+        cargo: string | null;
+    };
 }
 
 export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {

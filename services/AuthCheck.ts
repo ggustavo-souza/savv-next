@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { jwtVerify } from 'jose';
 import { db } from '../lib/db';
-import { usuarios } from '../lib/db/schema';
+import { usuarios, funcionario } from '../lib/db/schema';
 import { eq } from 'drizzle-orm';
 
 // faz uma consulta no banco de dados e devolve o usuário completo
@@ -18,6 +18,16 @@ export async function checarAutenticacao() {
         const { payload } = await jwtVerify(token, JWT_SECRET)
         const userId = payload.userId as number
         const cargo = payload.cargo as string | null
+
+        // Funcionários são armazenados em tabela diferente
+        if (cargo) {
+            const [func] = await db.select().from(funcionario).where(eq(funcionario.idFuncionario, userId)).limit(1)
+
+            if (!func)
+                return false
+
+            return { user: func, cargo }
+        }
 
         const [user] = await db.select().from(usuarios).where(eq(usuarios.idUsuario, userId)).limit(1)
 
@@ -54,17 +64,31 @@ export async function obterSessao() {
             return null;
         }
 
-        const [user] = await db.select().from(usuarios).where(eq(usuarios.idUsuario, payload.userId as number)).limit(1)
+        const userId = payload.userId as number;
+        const cargo = payload.cargo as string | null;
+
+        // Funcionários são armazenados em tabela diferente
+        if (cargo) {
+            const [func] = await db.select().from(funcionario).where(eq(funcionario.idFuncionario, userId)).limit(1)
+
+            if (!func) {
+                cookiesSessao.delete('session');
+                return null;
+            }
+
+            return { userId, cargo };
+        }
+
+        const [user] = await db.select().from(usuarios).where(eq(usuarios.idUsuario, userId)).limit(1)
 
         if(!user){
             cookiesSessao.delete('session');
             return null;
         }
 
-
         return {
-            userId: payload.userId as number,
-            cargo: payload.cargo as string | null,
+            userId,
+            cargo,
         };
     } catch {
         return null;
