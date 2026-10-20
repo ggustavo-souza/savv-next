@@ -60,7 +60,7 @@ export async function criarFuncionarioAction(_prevstate: CrudFuncionarioState, f
         return { error: 'Ocorreu um erro ao processar o registro. Tente novamente mais tarde.' }
     }
 
-    return {success: true}
+    return { success: true }
 }
 
 export async function atualizarFuncionarioAction(_prevstate: CrudFuncionarioState, formData: FormData): Promise<CrudFuncionarioState> {
@@ -68,7 +68,34 @@ export async function atualizarFuncionarioAction(_prevstate: CrudFuncionarioStat
 }
 
 export async function deletarFuncionarioAction(_prevstate: CrudFuncionarioState, formData: FormData): Promise<CrudFuncionarioState> {
-    return null;
+    const email = (formData.get('email') as string | null)?.trim().toLowerCase() ?? ''
+
+    if (!email) {
+        return { error: 'Preencha todos os campos obrigatórios.' }
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email) || email.length > 150) {
+        return { error: 'Por favor, insira um e-mail válido.' }
+    }
+
+    try {
+        const [usuarioExistente] = await db
+            .select()
+            .from(funcionario)
+            .where(eq(funcionario.email, email))
+            .limit(1)
+
+        if (usuarioExistente) {
+            await db.delete(funcionario).where(eq(funcionario.email, email))
+            return { success: true }
+        }
+    } catch (e) {
+        console.error('Erro ao cadastrar funcionário:', e)
+        return { error: 'Ocorreu um erro ao processar o registro. Tente novamente mais tarde.' }
+    }
+
+    return { success: true }
 }
 
 
