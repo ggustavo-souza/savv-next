@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { getSolicitacoesUsuario } from "@/services/getSolicitacoes";
 import { FaAngleDown } from "react-icons/fa6";
 import Image from "next/image";
+import ModalLogOut from "@/components/ModalLogOut";
 
 interface MinhaContaBodyProps {
     auth: {
@@ -29,6 +30,7 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
 
     // logica de carregamento das solicitações do usuário
     const [solicitacoes, setSolicitacoes] = useState<Awaited<ReturnType<typeof getSolicitacoesUsuario>> | null>(null);
+    const [modalLogOutAberto, setModalLogOutAberto] = useState(false);
 
     useEffect(() => {
         const carregarSolicitacoes = async (offset: number = 0) => {
@@ -42,20 +44,30 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
         <>
             <main className="min-h-screen py-10 px-4 bg-primaria">
                 <section className="justify-center items-center flex flex-col gap-8">
-                    <div className="max-w-3xl bg-white p-6 md:p-8 rounded-xs shadow-sm border border-gray-200 flex flex-col gap-8">
-                        <header className="flex flex-col sm:flex-row items-center sm:items-start pb-6 border-gray-100 ">
-                            <FormFotoPerfil
-                                fotoAtual={foto}
-                                nomeUsuario={auth?.user.nome}
-                            />
+                    <div className="w-full max-w-3xl bg-white p-6 md:p-8 rounded-xs shadow-sm border border-gray-200 flex flex-col gap-8">
+                        <header className="flex flex-col sm:flex-row items-center sm:items-start justify-between pb-6 border-b border-gray-100 gap-4">
+                            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                                <FormFotoPerfil
+                                    fotoAtual={foto}
+                                    nomeUsuario={auth?.user.nome}
+                                />
 
-                            <div className="flex self-start flex-col text-center sm:text-left gap-1 mt-2">
-                                <h2 className="text-2xl font-bold text-preta">{auth?.user.nome}</h2>
-                                <p className="text-xl font-medium text-gray-600">{auth?.user.email}</p>
-                                <span className="inline-block mt-2 px-3 py-1 bg-green-50 text-secundaria text-xs font-semibold rounded-full border border-green-200 w-fit self-center sm:self-start">
-                                    Munícipe Cadastrado
-                                </span>
+                                <div className="flex self-start flex-col text-center sm:text-left gap-1 mt-2">
+                                    <h2 className="text-2xl font-bold text-preta">{auth?.user.nome}</h2>
+                                    <p className="text-xl font-medium text-gray-600">{auth?.user.email}</p>
+                                    <span className="inline-block mt-2 px-3 py-1 bg-green-50 text-secundaria text-xs font-semibold rounded-full border border-green-200 w-fit self-center sm:self-start">
+                                        Munícipe Cadastrado
+                                    </span>
+                                </div>
                             </div>
+
+                            <button
+                                type="button"
+                                onClick={() => setModalLogOutAberto(true)}
+                                className="font-medium px-5 py-2 text-sm rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90 cursor-pointer self-center sm:self-start shrink-0"
+                            >
+                                Sair da Conta
+                            </button>
                         </header>
                     </div>
                     <section>
@@ -135,6 +147,9 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
                     </section>
                 </section>
             </main>
+            {modalLogOutAberto && (
+                <ModalLogOut onClose={() => setModalLogOutAberto(false)} />
+            )}
         </>
     )
 }

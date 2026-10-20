@@ -1,11 +1,17 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import ModalLogOut from "./ModalLogOut";
 
 interface NavbarProps {
   tipo: "visitante" | "usuario" | "diretor" | "gerente" | "fiscal"
 }
 
 export default function Navbar({ tipo }: NavbarProps) {
+  const [modalLogOutAberto, setModalLogOutAberto] = useState(false);
+
   return (
     <header className="w-full shadow-sm border-b h-fit border-gray-200 bg-primaria">
       <nav className="flex w-full justify-between px-10">
@@ -77,12 +83,13 @@ export default function Navbar({ tipo }: NavbarProps) {
               </Link>
             </li>
             <li>
-              <Link
-                href="/adminLogout"
-                className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90"
+              <button
+                type="button"
+                onClick={() => setModalLogOutAberto(true)}
+                className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90 cursor-pointer"
               >
                 Sair
-              </Link>
+              </button>
             </li>
           </ul>
         )}
@@ -94,12 +101,13 @@ export default function Navbar({ tipo }: NavbarProps) {
               </Link>
             </li>
             <li>
-              <Link
-                href="/logout"
-                className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90"
+              <button
+                type="button"
+                onClick={() => setModalLogOutAberto(true)}
+                className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90 cursor-pointer"
               >
                 Sair
-              </Link>
+              </button>
             </li>
           </ul>
         )}
@@ -116,16 +124,21 @@ export default function Navbar({ tipo }: NavbarProps) {
               </Link>
             </li>
             <li>
-              <Link
-                href="/logout"
-                className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90"
+              <button
+                type="button"
+                onClick={() => setModalLogOutAberto(true)}
+                className="hidden md:block font-medium px-6 py-2 lg:text-md xl:text-lg rounded-xs shadow-sm bg-secundaria text-primaria transition-colors hover:opacity-90 cursor-pointer"
               >
                 Sair
-              </Link>
+              </button>
             </li>
           </ul>
         )}
       </nav>
+
+      {modalLogOutAberto && (
+        <ModalLogOut onClose={() => setModalLogOutAberto(false)} />
+      )}
     </header>
   );
 }

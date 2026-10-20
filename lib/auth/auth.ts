@@ -25,3 +25,8 @@ export async function criarCookieSessao(userId: number, cargo: string | null = n
         maxAge: 60 * 60 * 24
     })
 }
+
+export async function removerCookieSessao() {
+    const guardarCookie = await cookies();
+    guardarCookie.delete('session');
+}
