@@ -11,7 +11,7 @@ export default async function Servico() {
     const auth = await checarAutenticacao();
 
     if (!auth) {
-        redirect('/login');
+        redirect('/login/usuario');
     }
 
     return (

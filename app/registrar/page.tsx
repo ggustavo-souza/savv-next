@@ -85,7 +85,7 @@ export default function Registrar() {
                     </form>
 
                     <span className="text-center mt-4">
-                        <p>Já possui conta? <Link className="font-bold text-lg underline text-secundaria" href="/login">Entre agora.</Link></p>
+                        <p>Já possui conta? <Link className="font-bold text-lg underline text-secundaria" href="/login/usuario">Entre agora.</Link></p>
                     </span>
                 </div>
             </main>
