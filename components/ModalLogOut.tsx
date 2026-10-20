@@ -35,7 +35,7 @@ export default function ModalLogOut({ onClose }: ModalLogOutProps) {
                 aria-hidden="true"
             />
 
-            <div className="relative z-10 bg-primaria w-full max-w-md p-6 sm:p-8 rounded-xs shadow-xl border border-gray-200 flex flex-col">
+            <div className="relative z-10 bg-primaria w-full max-w-lg p-6 sm:p-8 rounded-xs shadow-xl border border-gray-200 flex flex-col">
                 <button
                     type="button"
                     onClick={onClose}
@@ -58,12 +58,12 @@ export default function ModalLogOut({ onClose }: ModalLogOutProps) {
                     </p>
                 </div>
 
-                <div className="flex flex-row justify-end gap-3 mt-8">
+                <div className="flex flex-row justify-between gap-3 mt-8">
                     <button
                         type="button"
                         onClick={onClose}
                         disabled={isPending}
-                        className="bg-gray-500 text-primaria px-4 py-2 rounded-xs hover:brightness-90 cursor-pointer transition-all disabled:opacity-50 font-medium text-sm"
+                        className="bg-gray-500 text-primaria px-4 py-2 w-1/2 rounded-xs hover:brightness-90 cursor-pointer transition-all disabled:opacity-50 font-medium text-sm"
                     >
                         Cancelar
                     </button>
@@ -71,7 +71,7 @@ export default function ModalLogOut({ onClose }: ModalLogOutProps) {
                         type="button"
                         onClick={handleConfirmar}
                         disabled={isPending}
-                        className="bg-red-600 text-primaria px-5 py-2 rounded-xs hover:brightness-90 cursor-pointer transition-all disabled:opacity-50 font-semibold text-sm flex items-center justify-center min-w-24"
+                        className="bg-red-600 text-primaria px-5 py-2 w-full rounded-xs hover:brightness-90 cursor-pointer transition-all disabled:opacity-50 font-semibold text-md flex items-center justify-center min-w-24"
                     >
                         {isPending ? 'Saindo...' : 'Confirmar'}
                     </button>
