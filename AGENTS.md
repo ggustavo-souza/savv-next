@@ -79,7 +79,6 @@ Aplicação desenvolvida para modernizar, organizar e dar transparência às sol
   - `imagem`: Caminho/URL da foto anexada pelo cidadão.
   - `tipoServico`: `"poda"` | `"plantio"` | `"erradicacao"` | `"rocagem"`
   - `status`: Situação do chamado (veja fluxo abaixo).
-  - `atribuicao`: Responsável pela ação no momento: `"gerente"` | `"fiscal"` | `"fechada"`.
   - `idUsuario`: Vínculo com o munícipe solicitante.
 
 ### 3. Funcionários (Administração Municipal)

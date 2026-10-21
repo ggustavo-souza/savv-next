@@ -13,7 +13,6 @@ export type ServicoBD = {
     imagem: string
     status: "pendente" | "em_analise" | "concluida" | "cancelada"
     categoria: "poda" | "plantio" | "erradicacao" | "rocagem"
-    atribuicao: "gerente" | "fiscal" | "fechada"
     idUsuario: number // usando o ID do usuário salvo no registro do banco de dados
 }
 

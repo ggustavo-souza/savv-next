@@ -72,7 +72,6 @@ export async function criarServicoAction(_prevState: CriarServicoState, formData
             imagem: nomeArquivo,
             status: 'pendente',
             categoria,
-            atribuicao: 'gerente',
             data: new Date(),
             idUsuario: sessao.userId
         });
