@@ -27,7 +27,7 @@ export default async function HomeGerente() {
                 </div>
             </header>
             <main>
-                <header className='flex flex-row mx-12 border-b border-b-gray-300 gap-6 p-2'>
+                <header className='flex flex-row mx-12 gap-6 p-2'>
                     <p className="font-semibold text-gray-900 border-b-2 border-b-black cursor-pointer">ÍNDICE DE SOLICITAÇÕES</p>
                     <p className="font-semibold text-gray-500 cursor-pointer hover:brightness-75 transition-all duration-100">CONCLUÍDAS</p>
                     <p className="font-semibold text-gray-500 cursor-pointer hover:brightness-75 transition-all duration-100">EM ANDAMENTO</p>

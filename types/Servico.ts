@@ -12,7 +12,8 @@ export type ServicoBD = {
     lng: number
     imagem: string
     status: "pendente" | "em_analise" | "concluida" | "cancelada"
-    tipoServico: "poda" | "plantio" | "erradicacao" | "rocagem"
+    categoria: "poda" | "plantio" | "erradicacao" | "rocagem"
+    atribuicao: "gerente" | "fiscal" | "fechada"
     idUsuario: number // usando o ID do usuário salvo no registro do banco de dados
 }
 
@@ -25,6 +26,7 @@ export type ServicoApp = {
     lng: number
     imagem: string
     status: "pendente" | "em_analise" | "concluida" | "cancelada"
-    tipoServico: "poda" | "plantio" | "erradicacao" | "rocagem"
+    categoria: "poda" | "plantio" | "erradicacao" | "rocagem"
+    atribuicao: "gerente" | "fiscal" | "fechada"
     nomeUsuario: string // usando o ID do usuário salvo no registro do banco de dados
 }
