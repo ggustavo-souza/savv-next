@@ -60,7 +60,7 @@ export default function DiretorHomeBody() {
                 ) : funcionarios.length === 0 ? (
                     <p className="text-gray-500">Nenhum funcionário cadastrado.</p>
                 ) : (
-                    <div className="flex flex-row gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="flex-row gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {funcionarios.map((func) => (
                             <div key={func.idFuncionario} className="border-b gap-2 px-6 py-6 shadow-sm border-t border-t-gray-100 border-gray-200 hover:bg-gray-50 transition-colors w-full">
                                 <div className="flex flex-row justify-between">
