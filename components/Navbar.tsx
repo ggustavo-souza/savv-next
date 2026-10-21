@@ -119,7 +119,7 @@ export default function Navbar({ tipo }: NavbarProps) {
               </Link>
             </li>
             <li>
-              <Link href="/solicitacoes" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
+              <Link href="/admin/gerente/solicitacoes" className="hidden md:block font-medium lg:text-md xl:text-lg text-secundaria transition-colors hover:opacity-80">
                 Solicitações
               </Link>
             </li>
