@@ -14,6 +14,7 @@ export type ServicoBD = {
     status: "pendente" | "em_analise" | "concluida" | "cancelada"
     categoria: "poda" | "plantio" | "erradicacao" | "rocagem"
     idUsuario: number // usando o ID do usuário salvo no registro do banco de dados
+    idFiscal: number // usando o ID do fiscal salvo no registro do banco de dados (podendo ser null)
 }
 
 export type ServicoApp = {
@@ -28,4 +29,5 @@ export type ServicoApp = {
     categoria: "poda" | "plantio" | "erradicacao" | "rocagem"
     atribuicao: "gerente" | "fiscal" | "fechada"
     nomeUsuario: string // usando o ID do usuário salvo no registro do banco de dados
+    nomeFiscal: string //usando o ID do fiscal salvo no registro do banco de dados
 }
