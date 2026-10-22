@@ -151,7 +151,7 @@ export default function SolicitacoesGerenteBody({ solicitacoesIniciais }: Solici
                                                 <span className={`text-xs px-2.5 py-1 rounded-xs font-semibold ${st.classe}`}>
                                                     {st.rotulo}
                                                 </span>
-                                                <span className="text-xs px-2.5 py-1 rounded-xs font-medium bg-green-50 text-secundaria border border-green-200">
+                                                <span className={`text-xs px-2.5 py-1 rounded-xs font-medium border ${sol.categoria === "poda" || sol.categoria === "rocagem"  ? ("border-warning bg-warning/40 text-yellow-800") : sol.categoria === "erradicacao" ? "border-red-200 bg-red-50 text-red-800" : ("border-green-200 bg-green-50 text-secundaria")} `}>
                                                     {formatarCategoria(sol.categoria)}
                                                 </span>
                                             </div>

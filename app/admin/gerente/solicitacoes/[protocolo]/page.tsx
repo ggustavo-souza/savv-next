@@ -5,11 +5,9 @@ import { getSolicitacaoPorProtocolo } from '@/services/getSolicitacoes';
 import { getFiscais } from '@/services/getFuncionarios';
 import Link from 'next/link';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import { FaArrowLeft, FaMapPin, FaUser, FaClock, FaTag } from 'react-icons/fa6';
 import FormAtribuirFiscal from './FormAtribuirFiscal';
-
-const MapaDetalhes = dynamic(() => import('@/components/MapaDetalhes'), { ssr: false });
+import ContainerMapaDetalhes from './ContainerMapaDetalhes';
 
 export const metadata: Metadata = {
     title: 'SAVV - Detalhes da Solicitação',
@@ -201,9 +199,7 @@ export default async function DetalhesSolicitacaoPage({ params }: PaginaDetalhes
                         <p className="text-xs text-gray-500">
                             Lat: {solicitacao.lat.toFixed(5)} | Lng: {solicitacao.lng.toFixed(5)}
                         </p>
-                        <div className="rounded-xs overflow-hidden border border-gray-200 h-64">
-                            <MapaDetalhes lat={solicitacao.lat} lng={solicitacao.lng} />
-                        </div>
+                        <ContainerMapaDetalhes lat={solicitacao.lat} lng={solicitacao.lng} />
                     </div>
                 </div>
             </main>
