@@ -1,6 +1,7 @@
 import GraficoBarra from "../../components/GraficoBarra";
 import GraficoPizza from "../../components/GraficoPizza";
 import { getSolicitacoes } from "../../services/getSolicitacoes";
+import { getDadosTransparencia } from "@/services/getDadosGrafico";
 import { BsList } from "react-icons/bs";
 import ConverterNomeMes from "@/services/ConverterNomeMes";
 import type { Metadata } from "next";
@@ -14,23 +15,17 @@ export const dynamic = 'force-dynamic';
 
 export default async function Transparencia() {
 
-    const dadosGrafico = [
-        { chave: 'Jan', valor: 300 },
-        { chave: 'Fev', valor: 450 },
-        { chave: 'Mar', valor: 700 },
-        { chave: 'Abr', valor: 200 },
-        { chave: 'Mai', valor: 400 },
-        { chave: 'Jun', valor: 400 },
-    ];
+    const dadosGrafico = await getDadosTransparencia();
 
     const somaValores = dadosGrafico.reduce((acc, item) => acc + item.valor, 0);
 
     const allDenuncias: number = 2800;
-    const eficienciaDenuncias: number = (somaValores / allDenuncias) * 100
+    const eficienciaDenuncias: number = allDenuncias > 0 ? (somaValores / allDenuncias) * 100 : 0;
 
-    const mesPico = dadosGrafico.reduce((maior, atual) =>
-        atual.valor > maior.valor ? atual : maior
-    ).chave;
+    const itemPico = dadosGrafico.length > 0
+        ? dadosGrafico.reduce((maior, atual) => atual.valor > maior.valor ? atual : maior)
+        : null;
+    const mesPico = itemPico && itemPico.valor > 0 ? itemPico.mes : '';
 
     const marcadores = await getSolicitacoes();
 
@@ -70,7 +65,7 @@ export default async function Transparencia() {
                                 </div>
                                 <div>
                                     <p className="text-gray-400 font-bold text-sm sm:text-base 2xl:text-lg">Mês de Pico</p>
-                                    <h2 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold">{ConverterNomeMes(mesPico)}</h2>
+                                    <h2 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold">{ConverterNomeMes(mesPico) || 'Nenhum'}</h2>
                                 </div>
                             </div>
                         </header>

@@ -13,11 +13,23 @@ import {
 import { Bar } from 'react-chartjs-2'; //representa o componente da barra que vai ser renderizado
 import ChartDataLabels, { type Context } from 'chartjs-plugin-datalabels'; // representa o plugin que vai colocar os números em cima das barras
 
-interface GraficoBarraProps {
-    dadosGrafico: {chave: string, valor: number}[];
+export interface DadoGrafico {
+    mes: string;
+    valor: number;
+    chave?: string;
 }
 
-export default function GraficoBarra({dadosGrafico}: GraficoBarraProps) {
+export type GraficoBarraProps = DadoGrafico[];
+
+export interface GraficoBarraComponentProps {
+    dadosGrafico: GraficoBarraProps;
+}
+
+export default function GraficoBarra(props: GraficoBarraComponentProps | { dadosGrafico: GraficoBarraProps } | GraficoBarraProps) {
+    const dadosGrafico: GraficoBarraProps = Array.isArray(props)
+        ? props
+        : (Array.isArray(props?.dadosGrafico) ? props.dadosGrafico : []);
+
     // aqui a gente avisa pra biblioteca todos os elementos que serao usados no gráfico
     ChartJS.register(
         CategoryScale,
@@ -57,25 +69,28 @@ export default function GraficoBarra({dadosGrafico}: GraficoBarraProps) {
                 font: { weight: 'bold', size: 12, family: 'Poppins' }, // fonte do número
                 // Lógica para colorir o texto do label em destaque
                 color: (context: Context) => {
-                    const valor = context.dataset.data[context.dataIndex];
-                    const maiorValor = Math.max(...(context.dataset.data as number[]));
+                    const valor = Number(context.dataset.data[context.dataIndex]);
+                    const valores = (context.dataset.data as number[]).map(Number);
+                    const maiorValor = valores.length > 0 ? Math.max(...valores) : 0;
 
-                    return valor === maiorValor ? '#054100' : '#4b5563'; // Verde escuro para o destaque, cinza para os outros
+                    return valor === maiorValor && valor > 0 ? '#054100' : '#4b5563'; // Verde escuro para o destaque, cinza para os outros
                 },
             },
         },
     };
 
+    const maiorValorGrafico = dadosGrafico.length > 0 ? Math.max(...dadosGrafico.map(i => i.valor)) : 0;
+
     // Os dados dinâmicos recebidos via props (da API)
     const data = {
-        labels: dadosGrafico.map(item => item.chave), // pega os meses do array de dados
+        labels: dadosGrafico.map(item => item.mes ?? item.chave ?? ''), // pega os meses do array de dados
 
         datasets: [
             {
                 data: dadosGrafico.map(item => item.valor), // pega os valores do array de dados
                 // Lógica para colorir a barra que tem o maior valor (ou valor específico)
                 backgroundColor: dadosGrafico.map(item =>
-                    item.valor === Math.max(...dadosGrafico.map(i => i.valor)) ? '#054100' : '#e5e7eb' // Verde escuro vs Cinza claro
+                    item.valor === maiorValorGrafico && maiorValorGrafico > 0 ? '#054100' : '#e5e7eb' // Verde escuro vs Cinza claro
                 ),
                 barThickness: 15, // Deixa a barra mais fina, como no protótipo
                 borderRadius: 0,

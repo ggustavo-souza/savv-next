@@ -34,3 +34,9 @@ export async function getSolicitacoesUsuario(idUsuario: number, limit: number = 
 
     return solicitacoes;
 }
+
+export async function getContagemSolicitacoes() {
+    const contagemSolicitacoes = await db.$count(servicos)
+
+    return contagemSolicitacoes;
+}
