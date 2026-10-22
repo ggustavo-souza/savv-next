@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SolicitacaoListagem } from '@/services/getSolicitacoes';
-import { FaEye, FaFilter, FaCalendarAlt, FaMapPin, FaUser } from 'react-icons/fa';
+import { FaEye, FaCalendarAlt, FaMapPin, FaUser } from 'react-icons/fa';
 
 type StatusFiltro = 'todas' | 'pendente' | 'em_analise' | 'devolvida' | 'concluida';
 
