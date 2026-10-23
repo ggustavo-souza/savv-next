@@ -67,7 +67,7 @@ export default async function DetalhesSolicitacaoPage({ params }: PaginaDetalhes
         <div className="min-h-screen bg-primaria pb-16">
             <header className="flex flex-col mx-6 md:mx-12 my-10 gap-4">
                 <Link
-                    href="/admin/gerente/solicitacoes"
+                    href="/admin/fiscal"
                     className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-secundaria transition-colors w-fit"
                 >
                     <FaArrowLeft /> Voltar para lista de solicitações

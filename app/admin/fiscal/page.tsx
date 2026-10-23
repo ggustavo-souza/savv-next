@@ -44,6 +44,7 @@ export default async function HomeFiscal() {
                 </header>
                 <section>
                     <div className="grid grid-cols-1 gap-4">
+                        {solicitacoes.length === 0 && (<p className="text-gray-500 font-semibold text-md mt-10">Nenhuma solicitação foi encontrada.</p>)}
                         {solicitacoes.map((sol) => {
                             return (
                                 <div

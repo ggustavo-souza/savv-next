@@ -89,14 +89,14 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
                         <div>
                             {solicitacoes && solicitacoes.length > 0 ? (
                                 <div className="space-y-4 flex flex-col">
-                                    {opcoesFiltro.todas ? (
+                                    {opcoesFiltro.todas ? (     
                                         solicitacoes.map((solicitacao) => (
                                             <div key={solicitacao.protocolo} className="shadow-md border-t border-gray-100 flex p-4 flex-col sm:flex-row">
                                                 <div className="flex flex-col w-full space-y-2 me-4">
                                                     <div className="flex flex-row w-full gap-3">
                                                         <p className="px-3 py-1 bg-gray-500 text-white rounded-xs">#{solicitacao.protocolo}</p>
                                                         <p className={`px-3 py-1 ${solicitacao.categoria === 'poda' || solicitacao.categoria === 'rocagem' ? 'bg-warning' : solicitacao.categoria === 'erradicacao' ? 'bg-error' : 'bg-secundaria'} font-semibold text-white rounded-xs`}>{solicitacao.categoria.toUpperCase()}</p>
-                                                        <p className={`px-3 py-1 ${solicitacao.status === 'concluida' ? 'bg-secundaria' : solicitacao.status === 'pendente' ? 'bg-warning' : 'bg-error'} text-white rounded-xs font-semibold`}>{solicitacao.status.toUpperCase()}</p>
+                                                        <p className={`px-3 py-1 ${solicitacao.status === 'concluida' ? 'bg-secundaria' : solicitacao.status === 'pendente' ? 'bg-warning' : solicitacao.status === 'em_analise' ? 'bg-orange-400' : solicitacao.status === 'devolvida' ? "bg-preta" : 'bg-error'} text-white rounded-xs font-semibold`}>{solicitacao.status.toUpperCase() === "EM_ANALISE" ? "EM ANÁLISE" : solicitacao.status.toUpperCase()}</p>
                                                     </div>
                                                     <textarea readOnly value={solicitacao.observacao} className="w-full h-20 p-2 border border-gray-300 rounded-xs resize-none" />
                                                 </div>
@@ -109,7 +109,7 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
                                                         <div className="flex flex-row w-full gap-3">
                                                             <p className="px-3 py-1 bg-gray-500 text-white rounded-xs">#{solicitacao.protocolo}</p>
                                                             <p className={`px-3 py-1 ${solicitacao.categoria === 'poda' || solicitacao.categoria === 'rocagem' ? 'bg-warning' : solicitacao.categoria === 'erradicacao' ? 'bg-error' : 'bg-secundaria'} font-semibold text-white rounded-xs`}>{solicitacao.categoria.toUpperCase()}</p>
-                                                            <p className={`px-3 py-1 ${solicitacao.status === 'concluida' ? 'bg-secundaria' : solicitacao.status === 'pendente' ? 'bg-warning' : 'bg-error'} text-white rounded-xs font-semibold`}>{solicitacao.status.toUpperCase()}</p>
+                                                            <p className={`px-3 py-1 ${solicitacao.status === 'concluida' ? 'bg-secundaria' : solicitacao.status === 'pendente' ? 'bg-warning' : solicitacao.status === 'em_analise' ? 'bg-orange-400' : solicitacao.status === 'devolvida' ? "bg-preta" : 'bg-error'} text-white rounded-xs font-semibold`}>{solicitacao.status.toUpperCase() === "EM_ANALISE" ? "EM ANÁLISE" : solicitacao.status.toUpperCase()}</p>
                                                         </div>
                                                         <textarea readOnly value={solicitacao.observacao} className="w-full h-20 p-2 border border-gray-300 rounded-xs resize-none" />
                                                     </div>
@@ -123,7 +123,7 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
                                                     <div className="flex flex-row w-full gap-3">
                                                         <p className="px-3 py-1 bg-gray-500 text-white rounded-xs">#{solicitacao.protocolo}</p>
                                                         <p className={`px-3 py-1 ${solicitacao.categoria === 'poda' || solicitacao.categoria === 'rocagem' ? 'bg-warning' : solicitacao.categoria === 'erradicacao' ? 'bg-error' : 'bg-secundaria'} font-semibold text-white rounded-xs`}>{solicitacao.categoria.toUpperCase()}</p>
-                                                        <p className={`px-3 py-1 ${solicitacao.status === 'concluida' ? 'bg-secundaria' : solicitacao.status === 'pendente' ? 'bg-warning' : 'bg-error'} text-white rounded-xs font-semibold`}>{solicitacao.status.toUpperCase()}</p>
+                                                        <p className={`px-3 py-1 ${solicitacao.status === 'concluida' ? 'bg-secundaria' : solicitacao.status === 'pendente' ? 'bg-warning' : solicitacao.status === 'em_analise' ? 'bg-orange-400' : solicitacao.status === 'devolvida' ? "bg-preta" : 'bg-error'} text-white rounded-xs font-semibold`}>{solicitacao.status.toUpperCase() === "EM_ANALISE" ? "EM ANÁLISE" : solicitacao.status.toUpperCase()}</p>
                                                     </div>
                                                     <textarea readOnly value={solicitacao.observacao} className="w-full h-20 p-2 border border-gray-300 rounded-xs resize-none" />
                                                 </div>
@@ -131,7 +131,9 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
                                             </div>
                                         ))
                                     )}
-                                    <button onClick={async () => {
+                                    <button 
+                                    className="cursor-pointer"
+                                    onClick={async () => {
                                         const novasSolicitacoes = await getSolicitacoesUsuario(auth?.user.idUsuario, 5, solicitacoes.length);
                                         if (novasSolicitacoes.length > 0) {
                                             solicitacoes.push(...novasSolicitacoes);
