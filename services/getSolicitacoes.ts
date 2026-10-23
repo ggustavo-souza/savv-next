@@ -111,3 +111,28 @@ export async function getContagemSolicitacoes() {
 
     return contagemSolicitacoes;
 }
+
+export async function getSolicitacoesEmAndamento() {
+    const query = db
+        .select({
+            protocolo: servicos.protocolo,
+            data: servicos.data,
+            observacao: servicos.observacao,
+            endereco: servicos.endereco,
+            lat: servicos.lat,
+            lng: servicos.lng,
+            imagem: servicos.imagem,
+            status: servicos.status,
+            categoria: servicos.categoria,
+            idUsuario: servicos.idUsuario,
+            idFiscal: servicos.idFiscal,
+            nomeUsuario: usuarios.nome,
+            nomeFiscal: funcionario.nome,
+        })
+        .from(servicos)
+        .innerJoin(usuarios, eq(servicos.idUsuario, usuarios.idUsuario))
+        .leftJoin(funcionario, eq(servicos.idFiscal, funcionario.idFuncionario))
+        .orderBy(desc(servicos.data));
+
+        return await query.where(eq(servicos.status, "em_analise"))
+}
