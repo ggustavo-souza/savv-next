@@ -46,7 +46,7 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
                 <section className="justify-center items-center flex flex-col gap-8">
                     <div className="w-full max-w-3xl bg-white p-6 md:p-8 rounded-xs shadow-sm border border-gray-200 flex flex-col gap-8">
                         <header className="flex flex-col sm:flex-row items-center sm:items-start justify-between pb-6 border-b border-gray-100 gap-4">
-                            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                            <div className="flex flex-col  items-center sm:items-start gap-4">
                                 <FormFotoPerfil
                                     fotoAtual={foto}
                                     nomeUsuario={auth?.user.nome}
@@ -89,7 +89,7 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
                         <div>
                             {solicitacoes && solicitacoes.length > 0 ? (
                                 <div className="space-y-4 flex flex-col">
-                                    {opcoesFiltro.todas ? (     
+                                    {opcoesFiltro.todas ? (
                                         solicitacoes.map((solicitacao) => (
                                             <div key={solicitacao.protocolo} className="shadow-md border-t border-gray-100 flex p-4 flex-col sm:flex-row">
                                                 <div className="flex flex-col w-full space-y-2 me-4">
@@ -131,14 +131,14 @@ export default function MinhaContaBody({ auth }: MinhaContaBodyProps) {
                                             </div>
                                         ))
                                     )}
-                                    <button 
-                                    className="cursor-pointer"
-                                    onClick={async () => {
-                                        const novasSolicitacoes = await getSolicitacoesUsuario(auth?.user.idUsuario, 5, solicitacoes.length);
-                                        if (novasSolicitacoes.length > 0) {
-                                            solicitacoes.push(...novasSolicitacoes);
-                                        }
-                                    }}>
+                                    <button
+                                        className="cursor-pointer"
+                                        onClick={async () => {
+                                            const novasSolicitacoes = await getSolicitacoesUsuario(auth?.user.idUsuario, 5, solicitacoes.length);
+                                            if (novasSolicitacoes.length > 0) {
+                                                solicitacoes.push(...novasSolicitacoes);
+                                            }
+                                        }}>
                                         Carregar mais
                                     </button>
                                 </div>
