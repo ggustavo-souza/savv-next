@@ -8,10 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "drizzle:push": "drizzle-kit push && tsx lib/db/seed.ts",
+    "drizzle:push": "drizzle-kit push && tsx --env-file=.env lib/db/seed.ts",
+    "drizzle:seed": "tsx --env-file=.env lib/db/seed.ts",
     "drizzle:generate": "drizzle-kit generate",
     "drizzle:migrate": "drizzle-kit migrate",
-    "drizzle:run": "tsx lib/db/index.ts"
+    "drizzle:run": "tsx --env-file=.env lib/db/index.ts" 
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
