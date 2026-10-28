@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from 'next/font/google';
 import "./globals.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { obterSessao } from "../services/AuthCheck";
 
 const poppins = Poppins({
@@ -39,9 +40,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       lang="pt-BR"
       className={`${poppins.variable}`}
     >
-      <body className="min-h-full font-sans flex flex-col">
+      <body className="min-h-screen font-sans flex flex-col">
         <Navbar tipo={tipo} />
-        {children}
+        <div className="flex-1">
+          {children}
+        </div>
+        <Footer tipo={tipo} />
       </body>
     </html>
   );
