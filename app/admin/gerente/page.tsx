@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { checarAutenticacao } from '@/services/AuthCheck';
 import ContainerMapaGerente from './ContainerMapaGerente';
 import { getSolicitacoes, getContagemSolicitacoes } from '@/services/getSolicitacoes';
+import { getBairrosComMaisSolicitacoes } from '@/services/getBairrosComMaisSolicitacoes';
 import GraficoBarra from '@/components/GraficoBarra'
 import { getDadosGerente } from '@/services/getDadosGrafico';
 import { FaDownload } from 'react-icons/fa6';
@@ -29,6 +30,9 @@ export default async function HomeGerente() {
     //dados pro gráfico
     const dadosGrafico = await getDadosGerente();
 
+    // bairros com mais solicitações (top 3)
+    const bairrosMaisSolicitados = await getBairrosComMaisSolicitacoes(3);
+
     return (
         <>
             <header className="flex flex-row mx-12 my-16 justify-between items-end">
@@ -49,14 +53,56 @@ export default async function HomeGerente() {
                     <div className='flex flex-row gap-10'>
                         <ContainerMapaGerente marcadores={marcadores} />
 
-                        <div className='p-8 border border-gray-300 w-1/2'>
+                        <div className='p-8 border border-gray-300 w-1/2 flex flex-col justify-between'>
                             {/* informacoes das solicitações (total de solicitações do mês e bairros que mais aparecem nas solicitações) */}
-                            <div className="flex flex-col gap-4 border-b border-gray-300 pb-10">
+                            <div className="flex flex-col gap-4 border-b border-gray-300 pb-8">
                                 <p className="text-sm text-secundaria font-semibold">TOTAL DE SOLICITAÇÕES</p>
                                 <h1 className='text-5xl text-preta font-bold'>{totalSolicitacoes} Solicitações</h1>
                             </div>
-                            <div>
-                                puxar bairros
+                            <div className="flex flex-col gap-5 pt-6">
+                                <div className="flex justify-between items-center">
+                                    <p className="text-sm text-secundaria font-semibold uppercase tracking-wider">Top 3 Bairros com Mais Solicitações</p>
+                                    <span className="text-xs text-gray-500 font-medium">Maior incidência</span>
+                                </div>
+                                {bairrosMaisSolicitados.length === 0 ? (
+                                    <p className="text-gray-500 text-sm italic">Nenhum bairro com solicitações registrado.</p>
+                                ) : (
+                                    <div className="flex flex-col gap-4">
+                                        {bairrosMaisSolicitados.map((item, index) => {
+                                            const maiorIncidencia = bairrosMaisSolicitados[0]?.total || 1;
+                                            const larguraProporcional = Math.max(Math.round((item.total / maiorIncidencia) * 100), 8);
+
+                                            return (
+                                                <div key={item.bairro} className="flex flex-col gap-1.5">
+                                                    <div className="flex justify-between items-center text-sm">
+                                                        <span className="font-semibold text-preta truncate max-w-[220px]">
+                                                            {index + 1}º {item.bairro}
+                                                        </span>
+                                                        <span className="text-xs font-semibold text-gray-600">
+                                                            {item.total} {item.total === 1 ? 'chamado' : 'chamados'} ({item.porcentagem}%)
+                                                        </span>
+                                                    </div>
+                                                    <div className="w-full bg-gray-100 rounded-md h-5 p-0.5 overflow-hidden flex items-center">
+                                                        <div
+                                                            className={`h-full rounded-sm transition-all duration-500 flex items-center justify-end pr-2 text-[11px] font-bold text-white ${
+                                                                index === 0
+                                                                    ? 'bg-secundaria'
+                                                                    : index === 1
+                                                                    ? 'bg-secundaria/85'
+                                                                    : 'bg-secundaria/70'
+                                                            }`}
+                                                            style={{
+                                                                width: `${larguraProporcional}%`,
+                                                            }}
+                                                        >
+                                                            {larguraProporcional >= 25 && item.total}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
