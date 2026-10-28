@@ -35,6 +35,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     }
   }
 
+  const exibirFooter = tipo === "visitante" || tipo === "usuario";
+
   return (
     <html
       lang="pt-BR"
@@ -45,7 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <div className="flex-1">
           {children}
         </div>
-        <Footer tipo={tipo} />
+        {exibirFooter && <Footer tipo={tipo} />}
       </body>
     </html>
   );

@@ -27,6 +27,11 @@ export default async function Footer({ tipo }: FooterProps = {}) {
     }
   }
 
+  // Exclusividade do visitante e usuário comum
+  if (userTipo !== "visitante" && userTipo !== "usuario") {
+    return null;
+  }
+
   const isLogado = userTipo !== "visitante";
 
   return (
