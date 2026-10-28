@@ -32,6 +32,20 @@ export async function devolverSolicitacaoAction(
     }
 
     try {
+        const [solicitacao] = await db
+            .select()
+            .from(servicos)
+            .where(eq(servicos.protocolo, protocolo))
+            .limit(1);
+
+        if (!solicitacao) {
+            return { error: 'Solicitação não encontrada.' };
+        }
+
+        if (solicitacao.status !== 'em_analise') {
+            return { error: 'Esta solicitação já possui um veredito definido e não pode mais ser alterada.' };
+        }
+
         if (tipoDevolucao === 'devolver') {
             await db.transaction(async (tx) => {
                 await tx
