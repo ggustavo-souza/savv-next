@@ -12,6 +12,8 @@ interface SolicitacoesGerenteBodyProps {
     solicitacoesIniciais: SolicitacaoListagem[];
 }
 
+const STATUS_BLOQUEADOS = ['em_analise', 'concluida', 'cancelada'];
+
 export default function SolicitacoesGerenteBody({ solicitacoesIniciais }: SolicitacoesGerenteBodyProps) {
     const [filtro, setFiltro] = useState<StatusFiltro>('todas');
 
@@ -121,6 +123,7 @@ export default function SolicitacoesGerenteBody({ solicitacoesIniciais }: Solici
                         <div className="grid grid-cols-1 gap-4">
                             {solicitacoesFiltradas.map((sol) => {
                                 const st = formatarStatus(sol.status);
+                                const desabilitado = STATUS_BLOQUEADOS.includes(sol.status);
                                 return (
                                     <div
                                         key={sol.protocolo}
@@ -185,13 +188,25 @@ export default function SolicitacoesGerenteBody({ solicitacoesIniciais }: Solici
 
                                         {/* Botão de direcionamento para visualização específica */}
                                         <div className="w-full md:w-auto shrink-0 flex items-center">
-                                            <Link
-                                                href={`/admin/gerente/solicitacoes/${sol.protocolo}`}
-                                                className="w-full md:w-auto flex items-center justify-center gap-2 bg-secundaria text-primaria font-semibold px-5 py-2.5 rounded-xs hover:brightness-125 transition-all cursor-pointer text-sm"
-                                            >
-                                                <FaEye />
-                                                <span>Averiguar Detalhes</span>
-                                            </Link>
+                                            {desabilitado ? (
+                                                <button
+                                                    type="button"
+                                                    disabled
+                                                    className="w-full md:w-auto flex items-center justify-center gap-2 bg-gray-300 text-gray-500 font-semibold px-5 py-2.5 rounded-xs cursor-not-allowed text-sm"
+                                                    title="Não é possível averiguar solicitações com este status"
+                                                >
+                                                    <FaEye />
+                                                    <span>Averiguar Detalhes</span>
+                                                </button>
+                                            ) : (
+                                                <Link
+                                                    href={`/admin/gerente/solicitacoes/${sol.protocolo}`}
+                                                    className="w-full md:w-auto flex items-center justify-center gap-2 bg-secundaria text-primaria font-semibold px-5 py-2.5 rounded-xs hover:brightness-125 transition-all cursor-pointer text-sm"
+                                                >
+                                                    <FaEye />
+                                                    <span>Averiguar Detalhes</span>
+                                                </Link>
+                                            )}
                                         </div>
                                     </div>
                                 );

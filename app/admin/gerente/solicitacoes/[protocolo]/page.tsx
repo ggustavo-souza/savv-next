@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     title: 'SAVV - Detalhes da Solicitação',
 };
 
+const STATUS_BLOQUEADOS = ['em_analise', 'concluida', 'cancelada'];
+
 interface PaginaDetalhesProps {
     params: Promise<{
         protocolo: string;
@@ -35,6 +37,11 @@ export default async function DetalhesSolicitacaoPage({ params }: PaginaDetalhes
     const solicitacao = await getSolicitacaoPorProtocolo(protocolo);
     if (!solicitacao) {
         notFound();
+    }
+
+    // Bloqueia acesso a solicitações com status restrito
+    if (STATUS_BLOQUEADOS.includes(solicitacao.status)) {
+        redirect('/admin/gerente/solicitacoes');
     }
 
     const fiscais = await getFiscais();
