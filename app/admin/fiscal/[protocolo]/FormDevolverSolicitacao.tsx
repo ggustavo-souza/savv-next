@@ -20,11 +20,11 @@ export default function FormDevolverSolicitacao({ protocolo }: FormDevolverSolic
                 <button
                     className="flex flex-col bg-secundaria text-primaria p-6 items-center text-lg hover:scale-103 hover:brightness-125 transition-all duration-200 cursor-pointer"
                     onClick={() => setTipoDevolucao("devolver")}
-                ><FaCheck />{isPending ? "Carregando Ação" : "Aprovar Ação"}</button>
+                ><FaCheck />{isPending ? "Carregando Ação" : "Deferir Solicitação"}</button>
                 <button
                     className="flex flex-col bg-preta text-primaria p-6 items-center text-lg hover:scale-103 hover:brightness-125 transition-all duration-200 cursor-pointer"
                     onClick={() => setTipoDevolucao("cancelar")}
-                ><FaTimes />{isPending ? "Carregando Ação" : "Cancelar Solicitação"}</button>
+                ><FaTimes />{isPending ? "Carregando Ação" : "Indeferir Solicitação"}</button>
                 <input type="hidden" name="protocolo" value={protocolo} readOnly />
                 <input type="hidden" name="tipoDevolucao" value={tipoDevolucao} readOnly />
 
