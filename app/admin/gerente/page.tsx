@@ -55,13 +55,13 @@ export default async function HomeGerente() {
 
                         <div className='p-8 border border-gray-300 w-1/2 flex flex-col justify-between'>
                             {/* informacoes das solicitações (total de solicitações do mês e bairros que mais aparecem nas solicitações) */}
-                            <div className="flex flex-col gap-4 border-b border-gray-300 pb-8">
+                            <div className="flex flex-col gap-4 border-b border-gray-300 pb-4">
                                 <p className="text-sm text-secundaria font-semibold">TOTAL DE SOLICITAÇÕES</p>
                                 <h1 className='text-5xl text-preta font-bold'>{totalSolicitacoes} Solicitações</h1>
                             </div>
                             <div className="flex flex-col gap-5 pt-6">
                                 <div className="flex justify-between items-center">
-                                    <p className="text-sm text-secundaria font-semibold uppercase tracking-wider">Top 3 Bairros com Mais Solicitações</p>
+                                    <p className="text-sm text-secundaria font-semibold uppercase tracking-wider">Bairros com Mais Solicitações</p>
                                     <span className="text-xs text-gray-500 font-medium">Maior incidência</span>
                                 </div>
                                 {bairrosMaisSolicitados.length === 0 ? (
