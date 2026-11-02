@@ -2,6 +2,7 @@ import { checarAutenticacao } from "@/services/AuthCheck";
 import { redirect } from "next/navigation";
 import { getSolicitacoes } from "../services/getSolicitacoes";
 import ContainerMapaHome from "./ContainerMapaHome";
+import GuiaFluxo from "../components/GuiaFluxo";
 
 export const dynamic = 'force-dynamic';
 
@@ -45,6 +46,7 @@ export default async function Home() {
                     <h1 className="text-8xl mt-2 font-extrabold text-center text-secundaria">150</h1>
                 </div>
             </section>
+            <GuiaFluxo />
             <article className="flex flex-row mx-16 my-6 border border-gray-300 rounded-sm">
                 <ContainerMapaHome marcadores={marcadores} />
                 <aside className="w-1/4 self-center">
