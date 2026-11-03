@@ -27,7 +27,7 @@ export default async function Home() {
             <div className="relative h-screen w-full flex flex-col items-center justify-center gap-6 overflow-hidden group">
                 <div className="absolute inset-0 bg-[url('/foto-de-floresta.jpg')] bg-cover shadow-2xl bg-center bg-no-repeat brightness-50 grayscale group-hover:grayscale-0 transition-all duration-1000 z-0" />
                 <h1 className="text-6xl text-center font-extrabold text-white z-10 select-none max-w-2xl">Solicite Serviços Ambientais</h1>
-                <p className="text-xl text-center font-normal text-primaria z-10 select-none max-w-2xl">Uma plataforma para a solicitação de serviços ambientais. Transparência total para o cidadão.</p>
+                <p className="text-lg sm:text-xl text-center font-normal text-primaria z-10 select-none max-w-2xl">Uma plataforma para a solicitação de serviços ambientais. Transparência total para o cidadão.</p>
                 <button className="bg-primaria z-10 mt-4 cursor-pointer text-secundaria font-bold py-3 px-10 rounded-xs hover:scale-105 hover:brightness-90 transition-transform duration-200">Solicitar Serviço</button>
             </div>
             <section className="w-full h-fit bg-primaria flex flex-row justify-between gap-6 py-20 mx-auto px-10">
@@ -47,9 +47,9 @@ export default async function Home() {
                 </div>
             </section>
             <GuiaFluxo />
-            <article className="flex flex-row mx-16 my-6 border border-gray-300 rounded-sm">
+            <article className="flex flex-col sm:flex-row mx-6 sm:mx-16 my-6 border border-gray-300 rounded-sm">
                 <ContainerMapaHome marcadores={marcadores} />
-                <aside className="w-1/4 self-center">
+                <aside className="sm:w-1/4 my-6 sm:my-0 self-center">
                     <div className="flex flex-col px-8">
                         <h1 className="border-b border-gray-400 font-semibold mb-6 pb-2">PARÂMETROS DE EXIBIÇÃO</h1>
                         <div className="gap-3 flex-col flex">
