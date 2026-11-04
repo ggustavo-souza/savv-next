@@ -7,7 +7,7 @@ const MapaExibicao = dynamic(() => import('@/components/MapaExibicao'), { ssr: f
 
 export default function ContainerMapaGerente({ marcadores }: MapaExibicaoProps) {
     return (
-        <div className="w-1/2 h-130 z-10">
+        <div className="lg:w-1/2 h-100 sm:h-96 md:h-112 lg:h-130 z-10">
             <MapaExibicao marcadores={marcadores} />
         </div>
     )

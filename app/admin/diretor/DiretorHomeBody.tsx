@@ -41,13 +41,13 @@ export default function DiretorHomeBody() {
 
     return (
         <>
-            <header className="flex flex-row mx-12 my-16 justify-between items-end">
+            <header className="flex flex-col sm:flex-row text-center sm:text-left items-center mx-12 my-16 sm:justify-between sm:items-end justify-center">
                 <div className="flex flex-col gap-1">
                     <p className="text-sm text-secundaria font-semibold">CENTRAL DO DIRETOR</p>
                     <h1 className='text-5xl text-preta font-bold'>Gerenciar Funcionários</h1>
                 </div>
                 <button
-                    className="flex flex-row  items-center bg-secundaria px-3 py-4 text-lg text-primaria font-semibold hover:brightness-125 cursor-pointer rounded-xs"
+                    className="flex flex-row mt-4 sm:mt-0 items-center bg-secundaria px-3 py-4 text-lg text-primaria font-semibold hover:brightness-125 cursor-pointer rounded-xs"
                     onClick={() => setShowForm(!showForm)}
                 >
                     <FaPlus className="mx-2" />

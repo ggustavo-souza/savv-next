@@ -33,7 +33,7 @@ export default async function Transparencia() {
         <>
             <div className="w-full min-h-[calc(100vh-6rem)] flex flex-col lg:flex-row justify-center items-center gap-10 px-6 sm:px-12 lg:px-16 xl:px-24s">
                 <article className="flex flex-col w-full lg:w-5/12 text-center lg:text-start gap-4 lg:gap-6">
-                    <p className="font-bold text-secundaria text-sm sm:text-base 2xl:text-lg uppercase tracking-wide">NOSSA ATUAÇÃO</p>
+                    <p className="font-bold text-secundaria mt-2 sm:mt-8 text-sm sm:text-base 2xl:text-lg uppercase tracking-wide">NOSSA ATUAÇÃO</p>
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-bold text-black leading-tight">Transparência de Dados</h1>
                     <p className="text-base sm:text-lg 2xl:text-2xl font-light text-secundaria">Zelamos pela transparência e integridade dos nossos dados em todas as nossas operações.</p>
                 </article>
@@ -41,7 +41,7 @@ export default async function Transparencia() {
             </div>
             <section className="my-10 px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
                 {/* {Div dos gráficos} */}
-                <div className="w-full flex flex-col items-center justify-center gap-6 mt-10">
+                <div className="w-full flex flex-col items-center justify-center gap-6 mt-20">
                     <h1 className="text-3xl sm:text-4xl 2xl:text-5xl w-fit font-bold text-black mb-4 border-b-3 text-center pb-2">GRÁFICOS E DADOS</h1>
                 </div>
                 <div className="w-full flex flex-col lg:flex-row justify-center gap-8 mt-10">
